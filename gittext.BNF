@@ -1,19 +1,60 @@
 #parser
-<gittext>    ::= <begin> [var] bod {bod} <END>
-<body>       :: <para> <body> | <text> <body> | <heading> <body> | ... | epsilon ****NOT COMPLETE IMPLEMENTATION*****
-<text>       ::= <text> {<text>|<ws>}
-<ws>         ::= <>
+<gittext>       ::= <begin> [<var>] <title> <body> <END>
+<body>          :: <par_bod> <body> | <text_var> <body> | <head> <body>
+                    | <bold> <body> | <ital> <body> | <list> <body>
+                    | <nl> <body> | <link> <body> | <image> <body>
 
 #atributes
-<begin>     ::= "\BEGIN"
-<end>       ::= "\END"
+<var_use>       ::= <var_use_b> <text> <gen_end2>
+<var_use_b>     ::= \USE[
 
-<title>     ::= "\title[" <text> "]"
-<head>      ::= "#" <text>
-<par_b>     ::= "\PARB"
-<par_e>     ::= "\PARE"
-<bold>      ::= "*" <text> "*"
+<var>           ::= <var_b> <text> <var_m> <text> <gen_end2>
+<var_b>         ::= \DEF[
+<var_m>         ::= =
+
+<image>          ::= <image_b> <text> <gen_end> <gen_open> <text> <gen_end2>
+<image_b>        ::= ![
+
+<link>          ::= <link_b> <text> <gen_end> <gen_open> <text> <gen_end2>
+<link_b>        ::= [
+
+<list>          ::= <list_b> <text_var> [<nl>]
+<list_b>        ::= "+ "
+
+<ital>          ::= <ital_be> <text_var> <ital_be>
+<ital_be>       ::= *
+
+<bold>          ::= <bold_be> <text_var> <bold_be>
+<bold_be>       ::= **
+
+<par>           ::= <par_b> [<var>] <par_bod> <par_e>
+<par_bod>       ::= <text_var> <par_bod> | <bold> <par_bod> | <ital> <par_bod>| <link> <par_bod>
+<par_b>         ::= \PARB
+<par_e>         ::= \PARE
+
+<head>          ::= <head_b> <text_var> <nl>
+<head_b>        ::= #
+
+<title>         ::= <title_h> <text> <gen_end>
+<title_h>       ::= \TITLE[
+
+<beg>           ::= \BEGIN
+<end>           ::= \END
 
 
-<Document> :: "\Begin" <title> <body> "\End"
-<title> :: "\title[" <text> "]"
+<gen_end>       ::= ]
+<gen_open>      ::= (
+<gen_end2>      ::= )
+<nl>            ::= \\
+<empty>         ::= ε
+
+<text>          ::= <text> <text_def>
+<text_var>      ::= <text> <text_def> | <var_use> <text_def> | <empty>
+
+<text_def>      ::= <chars> | <uper_chars> | <nums> | <operators> | <ws>
+<chars>         ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
+<uper_chars>    ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
+<nums>          ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<operators>     ::= , | " | : | ? | . | / | _
+<ws>            ::= " " | \t | \r | \n
+

@@ -3,7 +3,7 @@ grammar gittext;
 //gernaral defentions
 TEXT 		: ('A'..'Z' | 'a'..'z' | '0'..'9' | ',' | '"' | ':' | '?' | '.' | '/' | '_' | '\u000C')*;
 WS  		: ( ' ' | '\t'  | '\r' | '\n' ) {$channel=HIDDEN;} ;
-NL		:'\\\\'; 
+NL		    :'\\\\';
 GENEND		:']';
 GEN_SB		:'(';
 GEN_SE		:')';
@@ -38,27 +38,27 @@ LINK_FB		:'[';
 
 
 //images atribute
-IMAGE_FB		:'![';
+IMAGE_FB	:'![';
 
 //Var atributes
-VAR_B 			:'\\DEF[';
-VAR_M			:' = ';
+VAR_B 		:'\\DEF[';
+VAR_M		:' = ';
 
 //use var
-VARISH_B		:'\\USE[';
+VARISH_B	:'\\USE[';
 
 //function defentions
-var		:VAR_B TEXT+ VAR_M TEXT+ GENEND;
+var		    :VAR_B TEXT+ VAR_M TEXT+ GENEND;
 varish		:VARISH_B TEXT+ GENEND;
-heading		:HEADING_B (TEXT | varish)*;
+heading		:HEADING_B (TEXT | varish)* NL;
 title		:TITLE_B TEXT+ GENEND;
 bold		:BOLD_B (TEXT | varish )* BOLD_E;
 italics		:ITAL_B (TEXT|varish)* ITAL_E;
 link		:LINK_FB TEXT+ GENEND GEN_SB TEXT+ GEN_SE;
 image		:IMAGE_FB TEXT+ GENEND GEN_SB TEXT+ GEN_SE;
-par		:PAR_B var*(link | TEXT | bold | italics | WS | NL| varish)+ PAR_E;
-list		:LIST_B (TEXT | bold | link | italics | varish)*; 
+par		    :PAR_B var*(link | TEXT | bold | italics | WS | NL| varish)+ PAR_E;
+list		:LIST_B (TEXT | bold | link | italics | varish)* NL*;
 
 //actual parser
-bod		:(heading|bold|italics|link|image|par|list| varish|WS| TEXT | NL )+;
-gittex		:HEAD var* title+ bod END;		
+bod		    :(heading|bold|italics|link|image|par|list| varish|WS| TEXT | NL )+;
+gittex		:HEAD var* title+ bod END;
