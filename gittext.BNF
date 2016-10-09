@@ -5,10 +5,10 @@
                     | <nl> <body> | <link> <body> | <image> <body>
 
 #atributes
-<var_use>       ::= <var_use_b> <text> <gen_end2>
+<var_use>       ::= <var_use_b> <text> <gen_end>
 <var_use_b>     ::= \USE[
 
-<var>           ::= <var_b> <text> <var_m> <text> <gen_end2>
+<var>           ::= <var_b> <text> <var_m> <text> <gen_end>
 <var_b>         ::= \DEF[
 <var_m>         ::= =
 
@@ -19,7 +19,7 @@
 <link_b>        ::= [
 
 <list>          ::= <list_b> <text_var> [<nl>]
-<list_b>        ::= "+ "
+<list_b>        ::= '+ '
 
 <ital>          ::= <ital_be> <text_var> <ital_be>
 <ital_be>       ::= *
@@ -56,5 +56,5 @@
 <uper_chars>    ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
 <nums>          ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 <operators>     ::= , | " | : | ? | . | / | _
-<ws>            ::= " " | \t | \r | \n
+<ws>            ::= \t | ' ' | \r | \n
 
