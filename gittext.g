@@ -45,7 +45,7 @@ VAR_B 			:'\\DEF[';
 VAR_M			:' = ';
 
 //use var
-VARISH_B		:'\\USE';
+VARISH_B		:'\\USE[';
 
 //function defentions
 var		:VAR_B TEXT+ VAR_M TEXT+ GENEND;
@@ -59,6 +59,6 @@ image		:IMAGE_FB TEXT+ GENEND GEN_SB TEXT+ GEN_SE;
 par		:PAR_B var*(link | TEXT | bold | italics | WS | NL| varish)+ PAR_E;
 list		:LIST_B (TEXT | bold | link | italics | varish)*; 
 
-//multiple titles or only top?  identify NL?
-bod		:(heading|bold|italics|link|image|par|list|WS| TEXT | NL | varish)+;
+//actual parser
+bod		:(heading|bold|italics|link|image|par|list| varish|WS| TEXT | NL )+;
 gittex		:HEAD var* title+ bod END;		

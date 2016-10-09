@@ -1,0 +1,19 @@
+#parser
+<gittext>    ::= <begin> [var] bod {bod} <END>
+<body>       :: <para> <body> | <text> <body> | <heading> <body> | ... | epsilon ****NOT COMPLETE IMPLEMENTATION*****
+<text>       ::= <text> {<text>|<ws>}
+<ws>         ::= <>
+
+#atributes
+<begin>     ::= "\BEGIN"
+<end>       ::= "\END"
+
+<title>     ::= "\title[" <text> "]"
+<head>      ::= "#" <text>
+<par_b>     ::= "\PARB"
+<par_e>     ::= "\PARE"
+<bold>      ::= "*" <text> "*"
+
+
+<Document> :: "\Begin" <title> <body> "\End"
+<title> :: "\title[" <text> "]"
