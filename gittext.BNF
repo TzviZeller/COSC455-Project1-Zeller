@@ -1,60 +1,58 @@
-#parser
-<gittext>       ::= <begin> [<var>] <title> <body> <END>
-<body>          :: <par_bod> <body> | <text_var> <body> | <head> <body>
-                    | <bold> <body> | <ital> <body> | <list> <body>
-                    | <nl> <body> | <link> <body> | <image> <body>
+Terminals:
+DOCB        ::= ‘\BEGIN’
+DOCE        ::= '\END'
+TITLEB      ::= '\TITLE['
+BRACKETE    ::= ‘]’
+HEADING     ::= '#'
+PARAB       ::= '\PARAB'
+PARAE       ::= '\PARAE'
+BOLD        ::= '**'
+ITALICS     ::= '*'
+LISTITEM    ::= '+'
+NEWLINE     ::= \\'
+LINKB       ::= '['
+ADDRESSB    ::= '('
+ADDRESSE    ::= ')'
+IMAGEB      ::= '!['
+DEFB        ::= '\DEF['
+EQSIGN      ::= '='
+USEB        ::= '\USE['
+REQTEXT     ::= Any plain text
+TEXT        ::= Any plain text | ε
 
-#atributes
-<var_use>       ::= <var_use_b> <text> <gen_end>
-<var_use_b>     ::= \USE[
+Production Rules:
+<gittex>    ::= DOCB <variable-define> <title> <body> DOCE
+<title>     ::= TITLEB REQTEXT BRACKETE
+<body>      ::= <inner-text> <body>
+                | <paragraph> <body>
+                | <newline> <body>
+                | ε
 
-<var>           ::= <var_b> <text> <var_m> <text> <gen_end>
-<var_b>         ::= \DEF[
-<var_m>         ::= =
+<paragraph>  ::= PARAB <variable-define> <inner-text> PARAE
+<inner-text> ::= <variable-use> <inner-text>
+                | <heading> <inner-text>
+                | <bold> <inner-text>
+                | <italics> <inner-text>
+                | <listitem> <inner-text>
+                | <image> <inner-text>
+                | <link> <inner-text>
+                | <newline> <inner-text>
+                | TEXT <inner-text>
+                | ε
 
-<image>          ::= <image_b> <text> <gen_end> <gen_open> <text> <gen_end2>
-<image_b>        ::= ![
+<heading>   ::= HEADING REQTEXT | ε
+<variable-define> ::= DEFB REQTEXT EQSIGN REQTEXT BRACKETE <variable-define> | ε
+<variable-use> ::= USEB REQTEXT BRACKETE | ε
+<bold> ::= BOLD TEXT BOLD | ε
+<italics> ::= ITALICS TEXT ITALICS | ε
+<listitem> ::= LISTITEMB <inner-item> <list-item> | ε
+<inner-item> ::= <variable-use> <inner- item>
+                | <bold> <inner- item>
+                | <italics> <inner- item>
+                | <link> <inner- item>
+                | REQTEXT <inner- item>
+                | ε
 
-<link>          ::= <link_b> <text> <gen_end> <gen_open> <text> <gen_end2>
-<link_b>        ::= [
-
-<list>          ::= <list_b> <text_var> [<nl>]
-<list_b>        ::= '+ '
-
-<ital>          ::= <ital_be> <text_var> <ital_be>
-<ital_be>       ::= *
-
-<bold>          ::= <bold_be> <text_var> <bold_be>
-<bold_be>       ::= **
-
-<par>           ::= <par_b> [<var>] <par_bod> <par_e>
-<par_bod>       ::= <text_var> <par_bod> | <bold> <par_bod> | <ital> <par_bod>| <link> <par_bod>
-<par_b>         ::= \PARB
-<par_e>         ::= \PARE
-
-<head>          ::= <head_b> <text_var> <nl>
-<head_b>        ::= #
-
-<title>         ::= <title_h> <text> <gen_end>
-<title_h>       ::= \TITLE[
-
-<beg>           ::= \BEGIN
-<end>           ::= \END
-
-
-<gen_end>       ::= ]
-<gen_open>      ::= (
-<gen_end2>      ::= )
-<nl>            ::= \\
-<empty>         ::= ε
-
-<text>          ::= <text> <text_def>
-<text_var>      ::= <text> <text_def> | <var_use> <text_def> | <empty>
-
-<text_def>      ::= <chars> | <uper_chars> | <nums> | <operators> | <ws>
-<chars>         ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
-<uper_chars>    ::= A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-<nums>          ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-<operators>     ::= , | " | : | ? | . | / | _
-<ws>            ::= \t | ' ' | \r | \n
-
+<link> ::= LINKB REQTEXT BRACKETE ADDRESSB REQTEXT ADDRESSE | ε
+<image> ::= IMAGEB REQTEXT BRACKETE ADDRESSB REQTEXT ADDRESSE | ε
+<newline> ::= NEWLINE | ε
