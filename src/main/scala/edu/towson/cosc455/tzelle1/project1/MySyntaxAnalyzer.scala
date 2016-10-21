@@ -17,7 +17,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
   }
 
   override def title(): Unit = {
-    if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)
+    if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)){
+      //add parse
+      Complier.Scanner.getNextToken()
+    }
+    else{
+      println("Error: no title")
+      System.exit(1)
+    }
   }
 
   override def body(): Unit = ???
