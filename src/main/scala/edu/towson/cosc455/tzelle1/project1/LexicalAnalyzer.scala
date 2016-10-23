@@ -5,6 +5,7 @@ package edu.towson.cosc455.tzelle1.project1
   */
 
 trait LexicalAnalyzer {
+  def start() :Unit
   def addChar() : Unit
   def getChar() : Char
   def getNextToken() : Unit
