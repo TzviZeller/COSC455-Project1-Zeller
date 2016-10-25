@@ -3,10 +3,10 @@ package edu.towson.cosc455.tzelle1.project1
 /**
   * Created by Tzvi on 10/11/2016.
   */
-class MySyntaxAnalyzer extends SyntaxAnalyzer{
+class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def gittex(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)){
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
       // add to parse tree / stack
       Compiler.Scanner.getNextToken()
     }
@@ -17,11 +17,11 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
   }
 
   override def title(): Unit = {
-    if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)){
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)) {
       //add parse
-      Complier.Scanner.getNextToken()
+      Compiler.Scanner.getNextToken()
     }
-    else{
+    else {
       println("Error: no title")
       System.exit(1)
     }
@@ -51,6 +51,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer{
 
   override def image(): Unit = ???
 
-  override def newline(): Unit = ???
+  override def newline(): Unit =
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
+    //add parse
+    Compiler.Scanner.getNextToken()
+  }
+  else {
+    println("Error: no title")
+    System.exit(1)
+  }
 
 }

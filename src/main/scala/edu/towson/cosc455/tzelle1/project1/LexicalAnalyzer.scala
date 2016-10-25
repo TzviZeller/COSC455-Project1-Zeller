@@ -5,11 +5,10 @@ package edu.towson.cosc455.tzelle1.project1
   */
 
 trait LexicalAnalyzer {
-  def start() :Unit
   def addChar() : Unit
   def getChar() : Char
   def getNextToken() : Unit
-  def lookup() : Boolean = {
-    println("This is lookup implementation!")
+  def lookup(token: String) : Boolean {
+
   }
 }

@@ -5,7 +5,7 @@ package edu.towson.cosc455.tzelle1.project1
 
 import scala.io.Source
 
-object Complier {
+object Compiler {
 
   var currentToken : String = ""
   var fileContents : String = ""
@@ -15,14 +15,15 @@ object Complier {
 
   def main(args: Array[String]) = {
     //checks for filetype and packs content into a string
-    checkFile(args(0))
+    checkFile(args)
     readFile(args(0))
 
     //pass fileString to
     lex.start(fileContents)
 
-  }
 
+
+  }
   //packs file into a string
   def readFile(file : String) = {
     val source = scala.io.Source.fromFile(file)
