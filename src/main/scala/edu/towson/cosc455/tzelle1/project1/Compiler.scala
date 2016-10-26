@@ -17,8 +17,9 @@ object Compiler{
     //checks for filetype and packs content into a string
     checkFile(args)
     readFile(args(0))
+    
+    //print(fileContents)
 
-    fileContents.length
     //pass fileString to
     // lex.start(fileContents)
     //sin.gittex()

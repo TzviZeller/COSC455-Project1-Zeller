@@ -9,7 +9,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def gittex(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
       // add to parse tree / stack
-      Compiler.Scanner.getNextToken()
+      Compiler.lex.getNextToken()
     }
     else {
       println("Error")
@@ -20,7 +20,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def title(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)) {
       //add parse
-      Compiler.Scanner.getNextToken()
+      Compiler.lex.getNextToken()
     }
     else {
       println("Error: no title")
@@ -57,7 +57,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def newline(): Unit =
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
       //add parse
-      Compiler.Scanner.getNextToken()
+      Compiler.lex.getNextToken()
     }
     else {
       println("Error: no title")

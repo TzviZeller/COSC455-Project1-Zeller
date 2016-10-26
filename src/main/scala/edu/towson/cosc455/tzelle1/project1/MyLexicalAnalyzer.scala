@@ -7,16 +7,18 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   val lookUp = new Array[String](17)
   var token = new Array[Char](50);
 
-  var nextChar: Char;
+  var file: String = "red"
+  var nextChar: Char  = ' '
   var tokenLength: Int = 0
   var position: Int = 0
   var space: Char = ' '
 
-  def start(file: String): Unit = {
+  def start(file1: String): Unit = {
     InishalizeLookupArray()
+    file = file1;
     position = 0
 
-    getChar(file)
+    getChar()
     getNextToken()
   }
 
@@ -34,7 +36,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     addChar()
   }
 
-  override def getChar(file: String) = {
+  override def getChar(): Unit = {
     if (position < file.length()) {
       nextChar = file.charAt(position)
       position += 1
