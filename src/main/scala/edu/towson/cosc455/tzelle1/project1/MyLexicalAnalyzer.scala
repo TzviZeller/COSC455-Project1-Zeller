@@ -5,12 +5,12 @@ package edu.towson.cosc455.tzelle1.project1
 
 class MyLexicalAnalyzer extends LexicalAnalyzer {
   val lookUp = new Array[String](17)
-  val space = ' '
+  var token = new Array[Char](50);
 
-  var token = new Array[Char](50)
-  var tokenLength : Int;
-  var position : Int;
-  var nextChar : Char;
+  var nextChar: Char;
+  var tokenLength: Int = 0
+  var position: Int = 0
+  var space: Char = ' '
 
   def start(file: String): Unit = {
     InishalizeLookupArray()
@@ -23,21 +23,21 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   override def addChar() = {
     if (tokenLength <= 98) {
       tokenLength += 1
-      token += nextChar
+      //token += nextChar
     }
-    if (!(nextChar=space)) {
-      while (!isSpace(nextChar)) {
+    if (nextChar != space) {
+      while (nextChar != space) {
         getChar()
       }
     }
-    tokenLength=0
+    tokenLength = 0
     addChar()
   }
 
   override def getChar(file: String) = {
     if (position < file.length()) {
       nextChar = file.charAt(position)
-      positon += 1
+      position += 1
     }
     else {
       nextChar = '\n'
@@ -54,6 +54,10 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       return false
     }
     return true
+  }
+
+  def setCurrent(currentTokrn: String): Unit = {
+    Compiler.currentToken = currentTokrn
   }
 
   def InishalizeLookupArray() = {

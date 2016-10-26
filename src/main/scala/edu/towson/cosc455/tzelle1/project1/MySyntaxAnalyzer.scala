@@ -1,8 +1,9 @@
 package edu.towson.cosc455.tzelle1.project1
 
-/**
-  * Created by Tzvi on 10/11/2016.
-  */
+import scala.util
+
+//Created by Tzvi on 10/11/2016.
+
 class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def gittex(): Unit = {
@@ -29,6 +30,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def body(): Unit = ???
 
+  //case statmen
+
   override def paragraph(): Unit = ???
 
   override def innerText(): Unit = ???
@@ -53,12 +56,12 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def newline(): Unit =
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
-    //add parse
-    Compiler.Scanner.getNextToken()
-  }
-  else {
-    println("Error: no title")
-    System.exit(1)
-  }
+      //add parse
+      Compiler.Scanner.getNextToken()
+    }
+    else {
+      println("Error: no title")
+      System.exit(1)
+    }
 
 }
