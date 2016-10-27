@@ -27,7 +27,7 @@ object Compiler{
       lex.getNextToken()
 
       //checks current token for syntax
-      //sin.gittex()
+      sin.gittex()
     }
   }
 

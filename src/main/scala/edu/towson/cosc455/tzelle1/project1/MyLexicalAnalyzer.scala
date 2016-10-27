@@ -4,11 +4,14 @@ package edu.towson.cosc455.tzelle1.project1
 //lexical analyzer is "spell" checking file
 
 import scala.collection.mutable.ArrayBuffer
-
+import scala.collection.mutable.ListBuffer
 
 class MyLexicalAnalyzer extends LexicalAnalyzer {
-  val lookUp = new Array[String](17)
+  val lookUp = new Array[String](20)
   var token = new ArrayBuffer[Char](50);
+  var fileHolder = new Array[Char] (500)
+
+
 
   var file: String = "red"
   var nextChar: Char = ' '
@@ -18,18 +21,18 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     file = file1;
-    getChar()//???
+    fileHolder = file.toCharArray
+    getChar() //???
   }
 
   override def addChar() = {
     if (tokenLength <= 98) {
-      if (nextChar != "\n" && !terminal()) {
+      if (!nextChar.equals("\n") && !terminal()) {
         tokenLength += 1
         token += nextChar
 
         getChar()
         addChar()
-
       }
       else {
         if (terminal()) {
@@ -50,20 +53,19 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   override def getChar(): Unit = {
     nextChar = file.head
-    token.remove(0)
+    fileHolder.drop(fileHolder.head)
   }
 
   override def getNextToken(): Unit = {
     tokenLength = 0
 
-    getNextToken()
+    //getNextToken()
     addChar()
-    if (nextChar != ' ' || nextChar != "\n" || !terminal())
+    if (!nextChar.equals(' ') || !nextChar.equals("\n") || !terminal())
       getChar()
-
     while ((nextChar != '\n') && (nextChar != ' ') && !terminal()) {
       addChar()
-      if (nextChar != ' ' || nextChar != "\n" || !terminal())
+      if (nextChar != ' ' || nextChar.equals("\n") || !terminal())
         getChar()
     }
 
@@ -87,14 +89,14 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   }
 
   def notText(): Unit = {
-    while (nextChar != ' ' || nextChar != "\n" || terminal()) {
+    while (nextChar != ' ' || !nextChar.equals("\n") || terminal()) {
       getChar()
     }
   }
 
   def terminal(): Boolean = {
-    if (nextChar == lookUp(3) || nextChar == lookUp(4) || nextChar == lookUp(10) || nextChar == lookUp(11) || nextChar == lookUp(13)
-      || nextChar == lookUp(14) || nextChar == lookUp(15) || nextChar == lookUp(16) || nextChar == '!' || nextChar == '\\') {
+    if (nextChar.equals(lookUp(3)) || nextChar.equals(lookUp(4)) || nextChar.equals(lookUp(10)) || nextChar.equals(lookUp(11)) || nextChar.equals(lookUp(13))
+      || nextChar.equals(lookUp(14)) || nextChar.equals(lookUp(15)) || nextChar.equals(lookUp(16)) || nextChar.equals('!') || nextChar.equals('\\')) {
       return true
     }
     else
@@ -102,7 +104,6 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   }
 
   def InishalizeLookupArray() = {
-    val lookUp = new Array[String](17)
     lookUp(0) = "\\BEGIN";
     lookUp(1) = "\\END";
     lookUp(2) = "\\TITLE[";
@@ -115,7 +116,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     lookUp(9) = "**";
     lookUp(10) = "*";
     lookUp(11) = "+";
-    lookUp(12) = "\\\\";
+    lookUp(12) = "\\";
     lookUp(13) = "[";
     lookUp(14) = "(";
     lookUp(15) = ")";

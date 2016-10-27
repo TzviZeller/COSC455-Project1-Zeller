@@ -6,16 +6,7 @@ import scala.util
 
 class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
-  override def gittex(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
-      // add to parse tree / stack
-      Compiler.lex.getNextToken()
-    }
-    else {
-      println("Error")
-      System.exit(1)
-    }
-  }
+  override def gittex(): Unit = ???
 
   override def title(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)) {
@@ -29,12 +20,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def body(): Unit = ???
-
   //case statmen
 
   override def paragraph(): Unit = ???
+  //case statmen
 
   override def innerText(): Unit = ???
+  //case statmen
 
   override def heading(): Unit = ???
 
@@ -63,5 +55,34 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       println("Error: no title")
       System.exit(1)
     }
+
+    def docb(): Unit ={
+      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
+        Compiler.lex.getNextToken()
+      }
+      else{
+        println("Error: no begining tag")
+        System.exit(1)
+      }
+    }
+
+  /*DOCB        ::= ‘\BEGIN’
+DOCE        ::= '\END'
+TITLEB      ::= '\TITLE['
+BRACKETE    ::= ‘]’
+HEADING     ::= '#'
+PARAB       ::= '\PARAB'
+PARAE       ::= '\PARAE'
+BOLD        ::= '**'
+ITALICS     ::= '*'
+LISTITEM    ::= '+'
+NEWLINE     ::= \\'
+LINKB       ::= '['
+ADDRESSB    ::= '('
+ADDRESSE    ::= ')'
+IMAGEB      ::= '!['
+DEFB        ::= '\DEF['
+EQSIGN      ::= '='
+USEB        ::= '\USE['*/
 
 }
