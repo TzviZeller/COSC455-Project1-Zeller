@@ -6,23 +6,29 @@ package edu.towson.cosc455.tzelle1.project1
 import scala.io.Source
 
 object Compiler{
+  val lex = new MyLexicalAnalyzer
+  val sin = new MySyntaxAnalyzer
 
   var currentToken: String = ""
   var fileContents: String = ""
-
-  val lex = new MyLexicalAnalyzer
-  val sin = new MySyntaxAnalyzer
 
   def main(args: Array[String]) = {
     //checks for filetype and packs content into a string
     checkFile(args)
     readFile(args(0))
-    
+
     //print(fileContents)
 
     //pass fileString to
-    // lex.start(fileContents)
-    //sin.gittex()
+    lex.start(fileContents)
+
+    while(!lex.file.isEmpty) {
+      //pass fileString to
+      //lex.getNextToken()
+
+      //checks current token for syntax
+      //sin.gittex()
+    }
   }
 
   //packs file into a string

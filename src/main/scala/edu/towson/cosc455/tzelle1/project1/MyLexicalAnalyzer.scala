@@ -3,12 +3,15 @@ package edu.towson.cosc455.tzelle1.project1
 //Created by Tzvi on 10/11/2016
 //lexical analyzer is "spell" checking file
 
+import scala.collection.mutable.ArrayBuffer
+
+
 class MyLexicalAnalyzer extends LexicalAnalyzer {
   val lookUp = new Array[String](17)
-  var token = new Array[Char](50);
+  var token = new ArrayBuffer[Char](50);
 
   var file: String = "red"
-  var nextChar: Char  = ' '
+  var nextChar: Char = ' '
   var tokenLength: Int = 0
   var position: Int = 0
   var space: Char = ' '
@@ -17,33 +20,28 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     InishalizeLookupArray()
     file = file1;
     position = 0
-
-    getChar()
-    getNextToken()
   }
 
   override def addChar() = {
     if (tokenLength <= 98) {
       tokenLength += 1
-      //token += nextChar
+      token(tokenLength) = nextChar
+      token(tokenLength) = 0
     }
-    if (nextChar != space) {
-      while (nextChar != space) {
-        getChar()
+    else {
+      println("LEXICAL ERROR - The found lexeme is too long!")
+      if (nextChar != space) {
+        while (nextChar != space) {
+          getChar()
+        }
       }
+      tokenLength = 0
+      addChar()
     }
-    tokenLength = 0
-    addChar()
   }
 
   override def getChar(): Unit = {
-    if (position < file.length()) {
-      nextChar = file.charAt(position)
-      position += 1
-    }
-    else {
-      nextChar = '\n'
-    }
+      nextChar = file.head
   }
 
   override def getNextToken(): Unit = {
@@ -53,13 +51,27 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   override def lookup(token: String): Boolean = {
     if (!lookUp.contains(token)) {
       println("Lexical Error: " + token + "is not valid")
-      return false
+      System.exit(1)
     }
     return true
   }
 
-  def setCurrent(currentTokrn: String): Unit = {
-    Compiler.currentToken = currentTokrn
+  def setCurrent(currentToken: String): Unit = {
+    Compiler.currentToken = currentToken
+  }
+
+  def notText(): Unit ={
+    while(nextChar!=' ' || nextChar!="\n" || terminal(nextChar)){
+      getChar()
+    }
+  }
+
+  def terminal(char: Char): Boolean ={
+    if(char==lookUp(3,4,10,11,13,14,15,16)|| char == '!' || char == '\\'){
+      return true
+    }
+    else
+      return false
   }
 
   def InishalizeLookupArray() = {
@@ -76,7 +88,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     lookUp(9) = "**";
     lookUp(10) = "*";
     lookUp(11) = "+";
-    lookUp(12) = "\\";
+    lookUp(12) = "\\\\";
     lookUp(13) = "[";
     lookUp(14) = "(";
     lookUp(15) = ")";
