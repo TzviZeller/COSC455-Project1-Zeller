@@ -24,7 +24,7 @@ object Compiler{
 
     while(!lex.file.isEmpty) {
       //pass fileString to
-      //lex.getNextToken()
+      lex.getNextToken()
 
       //checks current token for syntax
       //sin.gittex()

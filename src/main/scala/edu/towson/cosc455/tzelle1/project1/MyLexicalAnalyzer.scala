@@ -13,42 +13,68 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   var file: String = "red"
   var nextChar: Char = ' '
   var tokenLength: Int = 0
-  var position: Int = 0
   var space: Char = ' '
 
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     file = file1;
-    position = 0
+    getChar()//???
   }
 
   override def addChar() = {
     if (tokenLength <= 98) {
-      tokenLength += 1
-      token(tokenLength) = nextChar
-      token(tokenLength) = 0
+      if (nextChar != "\n" && !terminal()) {
+        tokenLength += 1
+        token += nextChar
+
+        getChar()
+        addChar()
+
+      }
+      else {
+        if (terminal()) {
+          token += nextChar
+        }
+        val posibleToken: String = token.mkString
+        if (lookUP(posibleToken)) {
+          setCurrent(posibleToken)
+          token.clear()
+        }
+      }
     }
     else {
       println("LEXICAL ERROR - The found lexeme is too long!")
-      if (nextChar != space) {
-        while (nextChar != space) {
-          getChar()
-        }
-      }
-      tokenLength = 0
-      addChar()
+      System.exit(1)
     }
   }
 
   override def getChar(): Unit = {
-      nextChar = file.head
+    nextChar = file.head
+    token.remove(0)
   }
 
   override def getNextToken(): Unit = {
-    val c = getChar()
+    tokenLength = 0
+
+    getNextToken()
+    addChar()
+    if (nextChar != ' ' || nextChar != "\n" || !terminal())
+      getChar()
+
+    while ((nextChar != '\n') && (nextChar != ' ') && !terminal()) {
+      addChar()
+      if (nextChar != ' ' || nextChar != "\n" || !terminal())
+        getChar()
+    }
+
+    val posibleToken: String = token.mkString
+    if (lookUP(posibleToken)) {
+      setCurrent(posibleToken)
+      token.clear()
+    }
   }
 
-  override def lookup(token: String): Boolean = {
+  override def lookUP(token: String): Boolean = {
     if (!lookUp.contains(token)) {
       println("Lexical Error: " + token + "is not valid")
       System.exit(1)
@@ -60,14 +86,15 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     Compiler.currentToken = currentToken
   }
 
-  def notText(): Unit ={
-    while(nextChar!=' ' || nextChar!="\n" || terminal(nextChar)){
+  def notText(): Unit = {
+    while (nextChar != ' ' || nextChar != "\n" || terminal()) {
       getChar()
     }
   }
 
-  def terminal(char: Char): Boolean ={
-    if(char==lookUp(3,4,10,11,13,14,15,16)|| char == '!' || char == '\\'){
+  def terminal(): Boolean = {
+    if (nextChar == lookUp(3) || nextChar == lookUp(4) || nextChar == lookUp(10) || nextChar == lookUp(11) || nextChar == lookUp(13)
+      || nextChar == lookUp(14) || nextChar == lookUp(15) || nextChar == lookUp(16) || nextChar == '!' || nextChar == '\\') {
       return true
     }
     else
