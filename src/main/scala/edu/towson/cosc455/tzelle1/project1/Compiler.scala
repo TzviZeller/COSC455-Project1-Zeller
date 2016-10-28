@@ -5,7 +5,7 @@ package edu.towson.cosc455.tzelle1.project1
 
 import scala.io.Source
 
-object Compiler{
+object Compiler {
   val lex = new MyLexicalAnalyzer
   val sin = new MySyntaxAnalyzer
 
@@ -17,17 +17,20 @@ object Compiler{
     checkFile(args)
     readFile(args(0))
 
-    //print(fileContents)
+    println("File passed in: ")
+    print(fileContents)
 
     //pass fileString to
     lex.start(fileContents)
 
-    while(!lex.file.isEmpty) {
+    //need this?
+    while (!lex.file.isEmpty) {
+
       //pass fileString to
       lex.getNextToken()
 
       //checks current token for syntax
-      sin.gittex()
+     // sin.gittex()
     }
   }
 
