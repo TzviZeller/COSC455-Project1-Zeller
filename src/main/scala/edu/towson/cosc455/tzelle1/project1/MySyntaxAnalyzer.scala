@@ -20,15 +20,26 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def body(): Unit = ???
+
   //case statmen
 
   override def paragraph(): Unit = ???
+
   //case statmen
 
   override def innerText(): Unit = ???
+
   //case statmen
 
-  override def heading(): Unit = ???
+  override def heading(): Unit = {
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: no begining tag")
+      System.exit(1)
+    }
+  }
 
   override def variableDefine(): Unit = ???
 
@@ -52,37 +63,131 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       Compiler.lex.getNextToken()
     }
     else {
-      println("Error: no title")
+      println("Error: no title")///
       System.exit(1)
     }
 
-    def docb(): Unit ={
-      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
-        Compiler.lex.getNextToken()
-      }
-      else{
-        println("Error: no begining tag")
-        System.exit(1)
-      }
+  def docb(): Unit = {
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
+      Compiler.lex.getNextToken()
     }
+    else {
+      println("Error: no begining tag")///
+      System.exit(1)
+    }
+  }
 
-  /*DOCB        ::= ‘\BEGIN’
-DOCE        ::= '\END'
-TITLEB      ::= '\TITLE['
+  def doce(): Unit = {
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+      Compiler.lex.getNextToken()
+    }
+    else {
+      println("Error: no begining tag")///
+      System.exit(1)
+    }
+  }
+
+  def titleb(): Unit = {
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.TITLEB)) {
+      Compiler.lex.getNextToken()
+    }
+    else {
+      println("Error: no begining tag")///
+      System.exit(1)
+    }
+  }
+
+  def headb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error:  tag") ///
+      System.exit(1)
+    }
+  }
+
+  def parb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAB)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def pare(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAE)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def boldb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def italb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def listItemb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def imageb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def useb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  /*
 BRACKETE    ::= ‘]’
-HEADING     ::= '#'
-PARAB       ::= '\PARAB'
-PARAE       ::= '\PARAE'
-BOLD        ::= '**'
-ITALICS     ::= '*'
-LISTITEM    ::= '+'
 NEWLINE     ::= \\'
 LINKB       ::= '['
 ADDRESSB    ::= '('
 ADDRESSE    ::= ')'
-IMAGEB      ::= '!['
 DEFB        ::= '\DEF['
 EQSIGN      ::= '='
-USEB        ::= '\USE['*/
+USEB        ::= '\USE['
+REQTEXT
+text
+*/
 
 }

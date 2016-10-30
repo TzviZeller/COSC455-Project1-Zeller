@@ -19,18 +19,23 @@ object Compiler {
 
     println("File passed in: ")
     print(fileContents)
+    println()
+    println()
+    println("Processing File: ")
+    println()
+
 
     //pass fileString to
     lex.start(fileContents)
 
     //need this?
-    while (!lex.file.isEmpty) {
+    while (!lex.fileHolder.isEmpty) {
 
       //pass fileString to
       lex.getNextToken()
 
       //checks current token for syntax
-     // sin.gittex()
+     sin.gittex()
     }
   }
 

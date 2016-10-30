@@ -1,5 +1,4 @@
-\BEGIN
-\TITLE[The Simpsons]
+s]
 # The Simpsons
 \PARB
 The members of the [The Simpsons](https://en.wikipedia.org/wiki/The_Simpsons) are:
