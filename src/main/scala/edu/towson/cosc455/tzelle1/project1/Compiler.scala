@@ -22,7 +22,8 @@ object Compiler {
     //formation for printout
     println("File passed in: ")
     print(fileContents)
-    println() println()
+    println()
+    println()
     println("Processing File: ")
     println("-------")
 
@@ -31,14 +32,16 @@ object Compiler {
 
     //loops till file empty
     while (!lex.fileHolder.isEmpty) {
+      //to remove base on syntax
       //gets current token
       lex.getNextToken()
 
       //checks current token for syntax
-      //sin.gittex()
+      sin.gittex()
     }
-
     //calls samantic analyzer
+    println("File has been read and checked")
+    println("File is being convereted to HTML")
     //sam.
   }
 

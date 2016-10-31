@@ -4,7 +4,7 @@ package edu.towson.cosc455.tzelle1.project1
   * Created by Tzvi on 10/11/2016.
   */
 object CONSTANTS {
-  val DOCB      : String = "\\BEGIN"
+  val DOCB      : String = "\\BEGIN\r\n"
   val DOCE      : String = "\\END"
   val TITLEB    : String = "\\TITLE["
   val BRACKETE  : String = "]"
@@ -22,7 +22,7 @@ object CONSTANTS {
   val DEFB      : String = "\\DEF"
   val EQSIGN    : String = "="
   val USEB      : String = "\\USE["
-  //val REQTEXT  : String = ???
+  val REQTEXT  : String = (('a' to 'z') ++ ('A' to 'Z') ++ ('0' to '9')).toString()
   //val TEXT  : String =  ????
 
 

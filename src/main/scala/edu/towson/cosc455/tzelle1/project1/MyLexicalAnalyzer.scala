@@ -41,6 +41,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
           val posibleToken: String = token.mkString //make array into string to check
           println(posibleToken)
           if (lookUP(posibleToken)) {
+            if(posibleToken == " " || posibleToken == "\r") getNextToken()
             setCurrent(posibleToken) //set token in compiler
             token.clear()
           }
@@ -51,7 +52,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     }
     else {
       //token was to long
-      println("LEXICAL ERROR - The found lexeme is too long!")
+      println("Lexical Error - The found lexeme is too long!")
       System.exit(1)
     }
   }
@@ -60,6 +61,12 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   override def getChar(): Unit = {
     if (!fileHolder.isEmpty) {
       nextChar = fileHolder.head
+      if(nextChar.equals(']')||nextChar.equals(')')||nextChar.equals('=') ||nextChar.equals('*')){
+        val posibleToken: String = token.mkString //make array into string to check
+        println(posibleToken)
+          setCurrent(posibleToken) //set token in compiler
+          token.clear()
+        }
       fileHolder = fileHolder.slice(1, fileHolder.length)
       filePosition += 1
     }
@@ -69,25 +76,17 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   override def getNextToken(): Unit = {
     //var reset
     tokenLength = 0
-    nextChar = ' '
+    nextChar = 'Z'
 
     getChar()
     getNotText() //to retrive terminal chars
     addChar()
-    if (!nextChar.equals(' ') || !nextChar.equals('\r') || !nextChar.equals('\n') || !terminal()) //if not terminal cut string
-      getChar()
-    while ((nextChar != '\n') && (nextChar != ' ') && !terminal()) {
-      //while current char is not terminal get next until terminal
-      addChar()
-      if (nextChar != ' ' || !nextChar.equals('\r') || !nextChar.equals('\n') || !terminal())
-        getChar()
-    }
-    addChar() //call add to add token
   }
 
   //method  call for token validation using submethods
   override def lookUP(token: String): Boolean = {
-    if (lookUp.contains(token)) {      //needs to be abe for lowercase @@@
+    if (lookUp.contains(token)) {
+      //needs to be abe for lowercase @@@
       return true
     }
     else if (token.endsWith("]") || token.endsWith("[") || token.endsWith(")") || token.endsWith("(") || token.endsWith("\n") || token.endsWith("=")) //identifies terminal ends
