@@ -6,37 +6,40 @@ package edu.towson.cosc455.tzelle1.project1
 import scala.io.Source
 
 object Compiler {
+  //inisalise classes and vars
   val lex = new MyLexicalAnalyzer
   val sin = new MySyntaxAnalyzer
-
+  val sam = new MySemanticAnalyzer
   var currentToken: String = ""
   var fileContents: String = ""
 
+  //driver for compiler
   def main(args: Array[String]) = {
     //checks for filetype and packs content into a string
     checkFile(args)
     readFile(args(0))
 
+    //formation for printout
     println("File passed in: ")
     print(fileContents)
-    println()
-    println()
+    println() println()
     println("Processing File: ")
-    println( "-------" )
-
+    println("-------")
 
     //pass fileString to
     lex.start(fileContents)
 
-    //need this?
+    //loops till file empty
     while (!lex.fileHolder.isEmpty) {
-
-      //pass fileString to
+      //gets current token
       lex.getNextToken()
 
       //checks current token for syntax
-     //sin.gittex()
+      //sin.gittex()
     }
+
+    //calls samantic analyzer
+    //sam.
   }
 
   //packs file into a string

@@ -4,19 +4,19 @@ package edu.towson.cosc455.tzelle1.project1
 //lexical analyzer is "spell" checking file
 
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.ListBuffer
 
 class MyLexicalAnalyzer extends LexicalAnalyzer {
+  //value decleration
   val lookUp = new Array[String](20)
   var token = new ArrayBuffer[Char](50)
   var fileHolder: List[Char] = List()
-
   var file: String = "red"
   var nextChar: Char = ' '
   var tokenLength: Int = 0
   var space: Char = ' '
   var filePosition: Int = 0
 
+  //starter method that primes getnexttoken
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     file = file1;
@@ -28,7 +28,6 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     if (tokenLength <= 98) {
       //check for resonible length
       if (!terminal()) {
-        //if not terminal then
         tokenLength += 1
         token += nextChar
 
@@ -37,17 +36,16 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       }
       else {
         if (!nextChar.equals('\r')) {
+          //adds nextchar to token and checks posible token
           token += nextChar
-
           val posibleToken: String = token.mkString //make array into string to check
           println(posibleToken)
           if (lookUP(posibleToken)) {
-            //lookup token
             setCurrent(posibleToken) //set token in compiler
             token.clear()
           }
         }
-        else
+        else //ignores \r
           getChar()
       }
     }
@@ -67,14 +65,15 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     }
   }
 
+  //method is main driver that recusevly pulls text into tokens
   override def getNextToken(): Unit = {
-    tokenLength = 0 //reset lenth property of currentToken
-    nextChar=' '
+    //var reset
+    tokenLength = 0
+    nextChar = ' '
 
     getChar()
     getNotText() //to retrive terminal chars
     addChar()
-    //getChar()//heeh
     if (!nextChar.equals(' ') || !nextChar.equals('\r') || !nextChar.equals('\n') || !terminal()) //if not terminal cut string
       getChar()
     while ((nextChar != '\n') && (nextChar != ' ') && !terminal()) {
@@ -83,22 +82,15 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       if (nextChar != ' ' || !nextChar.equals('\r') || !nextChar.equals('\n') || !terminal())
         getChar()
     }
-
-    /*val posibleToken: String = token.mkString //takes char sting and makes it a token
-    if (lookUP(posibleToken)) {
-      //checks valid
-      setCurrent(posibleToken) //calls set for compiler
-      token.clear() //clears array}*/
-    addChar()
-
+    addChar() //call add to add token
   }
 
   //method  call for token validation using submethods
   override def lookUP(token: String): Boolean = {
-    if (lookUp.contains(token)) {
+    if (lookUp.contains(token)) {      //needs to be abe for lowercase @@@
       return true
     }
-    else if (token.endsWith("]") || token.endsWith("[")|| token.endsWith(")") || token.endsWith("(") ||token.endsWith("\n")  || token.endsWith("="))
+    else if (token.endsWith("]") || token.endsWith("[") || token.endsWith(")") || token.endsWith("(") || token.endsWith("\n") || token.endsWith("=")) //identifies terminal ends
       return true
     else {
       println("Lexical Error: " + token + " is not valid")
@@ -155,7 +147,5 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     lookUp(18) = "]";
     lookUp(19) = "\r\n";
     lookUp(19) = " ";
-
-
   }
 }

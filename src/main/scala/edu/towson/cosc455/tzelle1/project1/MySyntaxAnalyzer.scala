@@ -67,6 +67,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       System.exit(1)
     }
 
+  //syntax defs form methods
   def docb(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
       Compiler.lex.getNextToken()
@@ -177,15 +178,32 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
     }
   }
 
+  def defb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
+
+  def useb(): Unit ={
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+      Compiler.lex.getNextToken()
+    }
+    else{
+      println("Error: \\PARAB is missing")///
+      System.exit(1)
+    }
+  }
   /*
 BRACKETE    ::= ‘]’
 NEWLINE     ::= \\'
 LINKB       ::= '['
 ADDRESSB    ::= '('
 ADDRESSE    ::= ')'
-DEFB        ::= '\DEF['
 EQSIGN      ::= '='
-USEB        ::= '\USE['
 REQTEXT
 text
 */
