@@ -22,7 +22,7 @@ object Compiler {
     println()
     println()
     println("Processing File: ")
-    println()
+    println( "-------" )
 
 
     //pass fileString to
@@ -35,7 +35,7 @@ object Compiler {
       lex.getNextToken()
 
       //checks current token for syntax
-     sin.gittex()
+     //sin.gittex()
     }
   }
 

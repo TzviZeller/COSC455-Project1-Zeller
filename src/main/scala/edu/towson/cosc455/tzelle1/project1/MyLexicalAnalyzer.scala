@@ -21,9 +21,6 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     InishalizeLookupArray()
     file = file1;
     fileHolder = file.toList
-
-    getChar()
-    getNextToken()
   }
 
   //called from getNext to manage new char grab
@@ -43,6 +40,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
           token += nextChar
 
           val posibleToken: String = token.mkString //make array into string to check
+          println(posibleToken)
           if (lookUP(posibleToken)) {
             //lookup token
             setCurrent(posibleToken) //set token in compiler
@@ -71,7 +69,9 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   override def getNextToken(): Unit = {
     tokenLength = 0 //reset lenth property of currentToken
+    nextChar=' '
 
+    getChar()
     getNotText() //to retrive terminal chars
     addChar()
     //getChar()//heeh
@@ -84,12 +84,13 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
         getChar()
     }
 
-    val posibleToken: String = token.mkString //takes char sting and makes it a token
+    /*val posibleToken: String = token.mkString //takes char sting and makes it a token
     if (lookUP(posibleToken)) {
       //checks valid
       setCurrent(posibleToken) //calls set for compiler
-      token.clear() //clears array
-    }
+      token.clear() //clears array}*/
+    addChar()
+
   }
 
   //method  call for token validation using submethods
@@ -97,7 +98,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     if (lookUp.contains(token)) {
       return true
     }
-    else if (token.endsWith("]"))
+    else if (token.endsWith("]") || token.endsWith("[")|| token.endsWith(")") || token.endsWith("(") ||token.endsWith("\n")  || token.endsWith("="))
       return true
     else {
       println("Lexical Error: " + token + " is not valid")
@@ -124,7 +125,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   //method for testing if it is a termnal token
   def terminal(): Boolean = {
     if (nextChar.equals(']') || nextChar.equals('#') || nextChar.equals('*') || nextChar.equals(lookUp(11)) || nextChar.equals('[')
-      || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals('=') || nextChar.equals('\n')) {
+      || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('\n')) {
       return true
     }
     else
@@ -133,7 +134,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   //defines lookup
   def InishalizeLookupArray() = {
-    lookUp(0) = "\\BEGIN";
+    lookUp(0) = "\\BEGIN\r\n";
     lookUp(1) = "\\END";
     lookUp(2) = "\\TITLE[";
     lookUp(3) = "]";
@@ -153,6 +154,8 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     lookUp(17) = "![";
     lookUp(18) = "]";
     lookUp(19) = "\r\n";
+    lookUp(19) = " ";
+
 
   }
 }
