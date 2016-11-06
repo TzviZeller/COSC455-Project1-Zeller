@@ -7,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 
 class helpmegod extends LexicalAnalyzer {
   //value decleration
-  val lookUp = new Array[String](25)
+  val lookUp = new Array[String](20)
   var token = new ArrayBuffer[Char](50)
   var fileHolder: Array[Char] = Array()
   var nextChar: Char = ' '
@@ -17,12 +17,11 @@ class helpmegod extends LexicalAnalyzer {
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     fileHolder = file1.toCharArray
-    print(lookUp(19))
   }
 
   //grabs next character
   override def getChar(): Unit = {
-    if (filePosition < fileHolder.length-1) {
+    if (filePosition < fileHolder.length - 1) {
       filePosition += 1
       nextChar = fileHolder.charAt(filePosition)
     }
@@ -31,7 +30,6 @@ class helpmegod extends LexicalAnalyzer {
   //called from getNext to manage new char grab
   override def addChar() {
     token += nextChar
-
   }
 
   //method is main driver that recusevly pulls text into tokens
@@ -39,14 +37,16 @@ class helpmegod extends LexicalAnalyzer {
     getChar()
     getNotText()
 
-    if (nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('#') || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals(']')) {
+    //breaks singular tokens
+    if (nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('#') || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals(']') || nextChar.equals('[')) {
       addChar()
-      pakage()
     }
+
+    //breaks for \\ defs
     else if (nextChar.equals('\\')) {
       addChar()
       getChar()
-      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n') {
+      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n' && nextChar != '\\') { //needs to breack for \\
         if (nextChar.equals('\r')) {
           addChar()
         }
@@ -59,6 +59,11 @@ class helpmegod extends LexicalAnalyzer {
       if (nextChar.equals('[')) {
         addChar()
       }
+
+      if (nextChar.equals('\\')) {
+        addChar()
+      }
+
     }
 
     else if (nextChar.equals('*')) {
@@ -87,26 +92,25 @@ class helpmegod extends LexicalAnalyzer {
         addChar()
         getChar()
       }
+      filePosition -= 1
     }
-
-
     pakage()
-
-
   }
 
-
-  def isText(str : String) : Boolean = {
-    var Text : Boolean = true
-    var i : Int = 0
-    while(i < str.length && !Text)
-    {
-
-      if(lookUp.contains(str.charAt(i)))
-        Text = false
+  //checks posible token to see if their are any special characters
+  def isText(text: String): Boolean = {
+    var isText: Boolean = true
+    var i: Int = 0
+    while (i < text.length && !isText) {
+      if (lookUp.contains(text.charAt(i))) {
+        isText = false
+      }
       i += 1
     }
-    Text
+    if(isText)
+      return true
+    else
+      return false
   }
 
   //method  call for token validation using submethods
@@ -166,6 +170,5 @@ class helpmegod extends LexicalAnalyzer {
     lookUp(17) = "![";
     lookUp(18) = "]";
     lookUp(19) = (('a' to 'z') ++ ('A' to 'Z') ++ ('0' to '9')).toString()
-
   }
 }

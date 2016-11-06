@@ -134,7 +134,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   def leftBrace(): Unit = {
-    if (Compiler.currentToken.endsWith("[")) {
+    if (Compiler.currentToken.equalsIgnoreCase("[")) {
       parse.push("[")
       Compiler.lex.getNextToken()
     }
@@ -158,7 +158,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   def rightParan(): Unit = {
-    if (Compiler.currentToken.endsWith("(")) {
+    if (Compiler.currentToken.equalsIgnoreCase("(")) {
       parse.push("(")
       Compiler.lex.getNextToken()
     }

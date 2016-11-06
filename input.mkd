@@ -1,14 +1,13 @@
 \BEGIN
-\TITLE[Variables]
-\DEF[lastname = Simpson]
+	\TITLE[Scoped Variables]
+	\DEF[name = Josh]
+
+	My name is \USE[name].
 
 	\PARB
-		The members of the \USE[name] family are:
+		\DEF[name = Jon]
+		Inside the paragraph block, my name is \USE[name].
 	\PARE
 
-	+ Homer \USE[name]
-	+ Marge \USE[name]
-	+ Bart \USE[name]
-	+ Lisa \USE[name]
-	+ Maggie \USE[name]
+	Now, my name is \USE[name] again.
 \END

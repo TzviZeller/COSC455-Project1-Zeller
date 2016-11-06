@@ -34,10 +34,10 @@ object Compiler {
     while (!lex.fileHolder.isEmpty) {
       //gets current token
       lex.getNextToken()
-
       //checks current token for syntax
-      sin.gittex()
+      //sin.gittex()
     }
+
     //calls samantic analyzer
     println("File has been read and checked")
     println("File is being convereted to HTML")
