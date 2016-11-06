@@ -46,11 +46,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def variableDefine(): Unit = {
-    defb()
-    text()
-    equl()
-    text()
-    rightBrace()
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+      defb()
+      text()
+      equl()
+      text()
+      rightBrace()
+    }
   }
 
   override def variableUse(): Unit = {

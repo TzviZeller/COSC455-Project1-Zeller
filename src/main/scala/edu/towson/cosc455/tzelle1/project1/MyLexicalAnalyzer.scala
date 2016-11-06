@@ -35,7 +35,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
         addChar() //recursie call
       }
       else {
-        if (!nextChar.equals('\r')) {
+        if (!nextChar.equals('\r')|| !nextChar.equals('\t')) {
           //adds nextchar to token and checks posible token
           token += nextChar
           val posibleToken: String = token.mkString //make array into string to check
@@ -127,17 +127,17 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def InishalizeLookupArray() = {
     lookUp(0) = "\\BEGIN\r\n";
     lookUp(1) = "\\END";
-    lookUp(2) = "\\TITLE[";
+    lookUp(2) = "\t\\TITLE[";
     lookUp(3) = "]";
     lookUp(4) = "#";
-    lookUp(5) = "\\PARAB";
-    lookUp(6) = "\\PARAE";
-    lookUp(7) = "\\DEF[";
-    lookUp(8) = "\\USE[";
+    lookUp(5) = "\t\\PARAB";
+    lookUp(6) = "\t\\PARAE";
+    lookUp(7) = "\t\\DEF[";
+    lookUp(8) = "\t\\USE[";
     lookUp(9) = "**";
     lookUp(10) = "*";
-    lookUp(11) = "+";
-    lookUp(12) = "\\\\";
+    lookUp(11) = "\t+";
+    lookUp(12) = "\t\\\\";
     lookUp(13) = "[";
     lookUp(14) = "(";
     lookUp(15) = ")";

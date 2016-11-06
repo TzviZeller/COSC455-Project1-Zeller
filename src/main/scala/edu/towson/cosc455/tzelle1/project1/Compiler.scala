@@ -7,7 +7,7 @@ import scala.io.Source
 
 object Compiler {
   //inisalise classes and vars
-  val lex = new MyLexicalAnalyzer
+  val lex = new helpmegod
   val sin = new MySyntaxAnalyzer
   val sam = new MySemanticAnalyzer
   var currentToken: String = ""
@@ -32,12 +32,11 @@ object Compiler {
 
     //loops till file empty
     while (!lex.fileHolder.isEmpty) {
-      //to remove base on syntax
       //gets current token
       lex.getNextToken()
 
       //checks current token for syntax
-      sin.gittex()
+      //sin.gittex()
     }
     //calls samantic analyzer
     println("File has been read and checked")
