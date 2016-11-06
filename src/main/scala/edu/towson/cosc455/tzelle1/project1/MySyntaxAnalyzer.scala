@@ -99,7 +99,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   //general syntax defs for methods
   def text(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.REQTEXT)) {
+    if (Compiler.lex.isText(Compiler.currentToken)) {
       parse.push(Compiler.currentToken)
       Compiler.lex.getNextToken()
     }
@@ -122,7 +122,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
     }
 
   def rightBrace(): Unit = {
-    if (Compiler.currentToken.endsWith("]")) {
+    if (Compiler.currentToken.equalsIgnoreCase("]")) {
       parse.push("]")
       Compiler.lex.getNextToken()
     }

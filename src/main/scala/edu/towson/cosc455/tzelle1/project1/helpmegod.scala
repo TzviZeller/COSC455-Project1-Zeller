@@ -7,7 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 
 class helpmegod extends LexicalAnalyzer {
   //value decleration
-  val lookUp = new Array[String](20)
+  val lookUp = new Array[String](25)
   var token = new ArrayBuffer[Char](50)
   var fileHolder: Array[Char] = Array()
   var nextChar: Char = ' '
@@ -17,11 +17,12 @@ class helpmegod extends LexicalAnalyzer {
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     fileHolder = file1.toCharArray
+    print(lookUp(19))
   }
 
   //grabs next character
   override def getChar(): Unit = {
-    if (filePosition < fileHolder.length) {
+    if (filePosition < fileHolder.length-1) {
       filePosition += 1
       nextChar = fileHolder.charAt(filePosition)
     }
@@ -29,8 +30,8 @@ class helpmegod extends LexicalAnalyzer {
 
   //called from getNext to manage new char grab
   override def addChar() {
-      token += nextChar
-    
+    token += nextChar
+
   }
 
   //method is main driver that recusevly pulls text into tokens
@@ -45,18 +46,19 @@ class helpmegod extends LexicalAnalyzer {
     else if (nextChar.equals('\\')) {
       addChar()
       getChar()
-      while (!nextChar.equals('[') || nextChar != '\n') {
-        if (nextChar.equals('\r'))
-          getChar()
+      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n') {
+        if (nextChar.equals('\r')) {
+          addChar()
+        }
         else {
           addChar()
           getChar()
         }
+
       }
       if (nextChar.equals('[')) {
         addChar()
       }
-      pakage()
     }
 
     else if (nextChar.equals('*')) {
@@ -69,7 +71,6 @@ class helpmegod extends LexicalAnalyzer {
       }
       else {
         filePosition -= 1
-        pakage()
       }
     }
     else if (nextChar.equals('!')) {
@@ -77,23 +78,41 @@ class helpmegod extends LexicalAnalyzer {
       getChar()
       if (nextChar.equals('['))
         addChar()
-      pakage()
     }
 
     else {
       addChar()
       getChar()
-      while (CONSTANTS.TOKENS.contains(nextChar)) {
+      while (!CONSTANTS.TOKENS.contains(nextChar)) {
         addChar()
         getChar()
       }
     }
+
+
+    pakage()
+
+
+  }
+
+
+  def isText(str : String) : Boolean = {
+    var Text : Boolean = true
+    var i : Int = 0
+    while(i < str.length && !Text)
+    {
+
+      if(lookUp.contains(str.charAt(i)))
+        Text = false
+      i += 1
+    }
+    Text
   }
 
   //method  call for token validation using submethods
   override def lookUP(posibleToken: String): Boolean = {
-    val posibleToken = token.toString()
-    if (lookUp.contains(posibleToken)) {
+    val posibleToken = token.mkString
+    if (lookUp.contains(posibleToken) || isText(posibleToken)) {
       return true
     }
     else {
@@ -107,7 +126,7 @@ class helpmegod extends LexicalAnalyzer {
   def pakage(): Unit = {
     val posibleToken: String = token.mkString //make array into string to check
     println(posibleToken)
-    if (lookUp.contains(posibleToken)) {
+    if (lookUp.contains(posibleToken) || isText(posibleToken)) {
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
@@ -146,5 +165,7 @@ class helpmegod extends LexicalAnalyzer {
     lookUp(16) = "=";
     lookUp(17) = "![";
     lookUp(18) = "]";
+    lookUp(19) = (('a' to 'z') ++ ('A' to 'Z') ++ ('0' to '9')).toString()
+
   }
 }

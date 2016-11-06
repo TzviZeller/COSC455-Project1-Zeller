@@ -19,8 +19,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   //starter method that primes getnexttoken
   def start(file1: String): Unit = {
     InishalizeLookupArray()
-    file = file1;
-    fileHolder = file.toList
+    fileHolder = file1.toList
   }
 
   //called from getNext to manage new char grab
