@@ -6,24 +6,93 @@ import scala.collection.mutable.Stack
 
 class MySyntaxAnalyzer extends SyntaxAnalyzer {
   var parse = Stack[String]()
+  var found: Boolean = false;
 
   override def gittex(): Unit = {
     docb()
-    variableDefine()
     title()
+    variableDefine()
     body()
     doce()
   }
+
   override def body(): Unit = {
-    //case statmen
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAB)) {
+      paragraph()
+      body()
+    }
+
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
+      newline()
+      body()
+    }
+    else {
+      innerText()
+      body()
+    }
   }
 
   override def innerText(): Unit = {
-    //case statmen
+    //flag? @@@
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+      variableUse()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+      heading()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+      bold()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+      italics()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
+      listItem()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
+      image()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
+      link()
+      innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
+      newline()
+      innerText()
+    }
+    else //posible if if need empty case @@@
+      posText()
   }
 
   override def innerItem(): Unit = {
-    //case statmen
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+      variableUse()
+      innerItem()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
+      bold()
+      innerItem()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
+      italics()
+      innerItem()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
+      link()
+      innerItem()
+    }
+    else if (Compiler.lex.isText(Compiler.currentToken)) {
+      text()
+      innerItem()
+    }
+    else
+      found = true //will need to mess with @@@
   }
 
   override def title(): Unit = {
@@ -63,13 +132,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def bold(): Unit = {
     bold()
-    //no req text
+    posText()
     bold()
   }
 
   override def italics(): Unit = {
     italics()
-    //no req text
+    posText()
     italics()
   }
 
@@ -107,6 +176,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       println("Syntax Error: Text was expected")
       println(Compiler.currentToken + "Was found instead")
       System.exit(1)
+    }
+  }
+
+  def posText(): Unit = {
+    if (Compiler.lex.isText(Compiler.currentToken)) {
+      parse.push(Compiler.currentToken)
+      Compiler.lex.getNextToken()
     }
   }
 

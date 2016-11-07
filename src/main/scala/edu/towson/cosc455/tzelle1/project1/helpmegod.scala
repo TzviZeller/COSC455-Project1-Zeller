@@ -46,7 +46,7 @@ class helpmegod extends LexicalAnalyzer {
     else if (nextChar.equals('\\')) {
       addChar()
       getChar()
-      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n' && nextChar != '\\') { //needs to breack for \\
+      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n' && nextChar != '\\') {
         if (nextChar.equals('\r')) {
           addChar()
         }
@@ -54,16 +54,13 @@ class helpmegod extends LexicalAnalyzer {
           addChar()
           getChar()
         }
-
       }
       if (nextChar.equals('[')) {
         addChar()
       }
-
       if (nextChar.equals('\\')) {
         addChar()
       }
-
     }
 
     else if (nextChar.equals('*')) {
@@ -84,7 +81,6 @@ class helpmegod extends LexicalAnalyzer {
       if (nextChar.equals('['))
         addChar()
     }
-
     else {
       addChar()
       getChar()
@@ -107,26 +103,13 @@ class helpmegod extends LexicalAnalyzer {
       }
       i += 1
     }
-    if(isText)
+    if (isText)
       return true
     else
       return false
   }
 
-  //method  call for token validation using submethods
-  override def lookUP(posibleToken: String): Boolean = {
-    val posibleToken = token.mkString
-    if (lookUp.contains(posibleToken) || isText(posibleToken)) {
-      return true
-    }
-    else {
-      println("Lexical Error: " + posibleToken + " is not valid")
-      System.exit(1)
-      return false
-    }
-  }
-
-  //pakage string
+  //pakage string if passses lookup
   def pakage(): Unit = {
     val posibleToken: String = token.mkString //make array into string to check
     println(posibleToken)

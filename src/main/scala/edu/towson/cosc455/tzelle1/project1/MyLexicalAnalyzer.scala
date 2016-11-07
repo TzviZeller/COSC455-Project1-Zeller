@@ -9,91 +9,113 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   //value decleration
   val lookUp = new Array[String](20)
   var token = new ArrayBuffer[Char](50)
-  var fileHolder: List[Char] = List()
-  var file: String = "red"
+  var fileHolder: Array[Char] = Array()
   var nextChar: Char = ' '
-  var tokenLength: Int = 0
-  var space: Char = ' '
-  var filePosition: Int = 0
+  var filePosition: Int = -1
 
   //starter method that primes getnexttoken
   def start(file1: String): Unit = {
     InishalizeLookupArray()
-    fileHolder = file1.toList
+    fileHolder = file1.toCharArray
+  }
+
+  //grabs next character
+  override def getChar(): Unit = {
+    if (filePosition < fileHolder.length - 1) {
+      filePosition += 1
+      nextChar = fileHolder.charAt(filePosition)
+    }
   }
 
   //called from getNext to manage new char grab
-  override def addChar() = {
-    if (tokenLength <= 98) {
-      //check for resonible length
-      if (!terminal()) {
-        tokenLength += 1
-        token += nextChar
-
-        getChar() //get next char
-        addChar() //recursie call
-      }
-      else {
-        if (!nextChar.equals('\r')|| !nextChar.equals('\t')) {
-          //adds nextchar to token and checks posible token
-          token += nextChar
-          val posibleToken: String = token.mkString //make array into string to check
-          println(posibleToken)
-          if (lookUP(posibleToken)) {
-            if(posibleToken == " " || posibleToken == "\r") getNextToken()
-            setCurrent(posibleToken) //set token in compiler
-            token.clear()
-          }
-        }
-        else //ignores \r
-          getChar()
-      }
-    }
-    else {
-      //token was to long
-      println("Lexical Error - The found lexeme is too long!")
-      System.exit(1)
-    }
-  }
-
-  //simply rips head of read file
-  override def getChar(): Unit = {
-    if (!fileHolder.isEmpty) {
-      nextChar = fileHolder.head
-      if(nextChar.equals(']')||nextChar.equals(')')||nextChar.equals('=') ||nextChar.equals('*')){
-        val posibleToken: String = token.mkString //make array into string to check
-        println(posibleToken)
-          setCurrent(posibleToken) //set token in compiler
-          token.clear()
-        }
-      fileHolder = fileHolder.slice(1, fileHolder.length)
-      filePosition += 1
-    }
+  override def addChar() {
+    token += nextChar
   }
 
   //method is main driver that recusevly pulls text into tokens
   override def getNextToken(): Unit = {
-    //var reset
-    tokenLength = 0
-    nextChar = 'Z'
-
     getChar()
-    getNotText() //to retrive terminal chars
-    addChar()
+    getNotText()
+
+    //breaks singular tokens
+    if (nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('#') || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals(']') || nextChar.equals('[')) {
+      addChar()
+    }
+
+    //breaks for \\ defs
+    else if (nextChar.equals('\\')) {
+      addChar()
+      getChar()
+      while (!nextChar.equals('[') && nextChar != '\r' && nextChar != '\n' && nextChar != '\\') {
+        if (nextChar.equals('\r')) {
+          addChar()
+        }
+        else {
+          addChar()
+          getChar()
+        }
+      }
+      if (nextChar.equals('[')) {
+        addChar()
+      }
+      if (nextChar.equals('\\')) {
+        addChar()
+      }
+    }
+
+    else if (nextChar.equals('*')) {
+      addChar()
+      getChar()
+      if (nextChar.equals('*')) {
+        addChar()
+        getChar()
+        pakage()
+      }
+      else {
+        filePosition -= 1
+      }
+    }
+    else if (nextChar.equals('!')) {
+      addChar()
+      getChar()
+      if (nextChar.equals('['))
+        addChar()
+    }
+    else {
+      addChar()
+      getChar()
+      while (!CONSTANTS.TOKENS.contains(nextChar)) {
+        addChar()
+        getChar()
+      }
+      filePosition -= 1
+    }
+    pakage()
   }
 
-  //method  call for token validation using submethods
-  override def lookUP(token: String): Boolean = {
-    if (lookUp.contains(token)) {
-      //needs to be abe for lowercase @@@
-      return true
+  //checks posible token to see if their are any special characters
+  def isText(text: String): Boolean = {
+    var isText: Boolean = true
+    var i: Int = 0
+    while (i < text.length && !isText) {
+      if (lookUp.contains(text.charAt(i))) {
+        isText = false
+      }
+      i += 1
     }
-    else if (token.endsWith("]") || token.endsWith("[") || token.endsWith(")") || token.endsWith("(") || token.endsWith("\n") || token.endsWith("=")) //identifies terminal ends
+    if (isText)
       return true
-    else {
-      println("Lexical Error: " + token + " is not valid")
-      System.exit(1)
+    else
       return false
+  }
+
+  //pakage string if passses lookup
+  def pakage(): Unit = {
+    val posibleToken: String = token.mkString //make array into string to check
+    println(posibleToken)
+    if (lookUp.contains(posibleToken) || isText(posibleToken)) {
+      setCurrent(posibleToken) //set token in compiler
+      token.clear()
     }
   }
 
@@ -104,46 +126,32 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   //loop for retreving terminal tokens/chras
   def getNotText(): Unit = {
-    while (nextChar.equals(' ') || nextChar.equals('\r') || nextChar.equals('\n') || terminal()) {
-      if (terminal()) {
-        addChar()
-      }
+    while (nextChar.equals(' ') || nextChar.equals('\r') || nextChar.equals('\n') || nextChar.equals('\t')) {
       getChar()
     }
   }
 
-  //method for testing if it is a termnal token
-  def terminal(): Boolean = {
-    if (nextChar.equals(']') || nextChar.equals('#') || nextChar.equals('*') || nextChar.equals(lookUp(11)) || nextChar.equals('[')
-      || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('\n')) {
-      return true
-    }
-    else
-      return false
-  }
-
   //defines lookup
   def InishalizeLookupArray() = {
-    lookUp(0) = "\\BEGIN\r\n";
+    lookUp(0) = "\\BEGIN";
     lookUp(1) = "\\END";
-    lookUp(2) = "\t\\TITLE[";
+    lookUp(2) = "\\TITLE[";
     lookUp(3) = "]";
     lookUp(4) = "#";
-    lookUp(5) = "\t\\PARAB";
-    lookUp(6) = "\t\\PARAE";
-    lookUp(7) = "\t\\DEF[";
-    lookUp(8) = "\t\\USE[";
+    lookUp(5) = "\\PARAB";
+    lookUp(6) = "\\PARAE";
+    lookUp(7) = "\\DEF[";
+    lookUp(8) = "\\USE[";
     lookUp(9) = "**";
     lookUp(10) = "*";
-    lookUp(11) = "\t+";
-    lookUp(12) = "\t\\\\";
+    lookUp(11) = "+";
+    lookUp(12) = "\\\\";
     lookUp(13) = "[";
     lookUp(14) = "(";
     lookUp(15) = ")";
     lookUp(16) = "=";
     lookUp(17) = "![";
     lookUp(18) = "]";
-    lookUp(19) = "\r\n";
-    lookUp(19) = " ";
+    lookUp(19) = (('a' to 'z') ++ ('A' to 'Z') ++ ('0' to '9')).toString()
   }
 }

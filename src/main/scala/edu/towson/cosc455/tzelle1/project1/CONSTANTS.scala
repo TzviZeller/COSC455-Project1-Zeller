@@ -22,9 +22,6 @@ object CONSTANTS {
   val DEFB      : String = "\\DEF"
   val EQSIGN    : String = "="
   val USEB      : String = "\\USE["
-  val REQTEXT   : String = (('a' to 'z') ++ ('A' to 'Z') ++ ('0' to '9')).toString()
-  val TOKENS    : String = ('\\', '#', '*','[','!', ']', '+', '(', ')').toString()
-
-
-
+  val REQTEXT   : String = ",abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789."
+  val TOKENS    : String = ('\\', '#', '*','[','!', ']', '+', '(', ')', '=').toString()
 }
