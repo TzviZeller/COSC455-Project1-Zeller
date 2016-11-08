@@ -10,8 +10,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def gittex(): Unit = {
     docb()
-    title()
     variableDefine()
+    title()
     body()
     doce()
   }

@@ -31,17 +31,17 @@ object Compiler {
     lex.start(fileContents)
 
     //loops till file empty
-    while (lex.filePosition < lex.fileHolder.length - 1 ) {
+    while (lex.filePosition < lex.filesize) { //@@@
       //gets current token
       lex.getNextToken()
       //checks current token for syntax
-      sin.gittex()
+      //sin.gittex()
     }
 
     //calls samantic analyzer
     println("File has been read and checked")
     println("File is being convereted to HTML")
-    //sam.
+    //sam.symantics()
   }
 
   //packs file into a string

@@ -11,20 +11,24 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   var token = new ArrayBuffer[Char](50)
   var fileHolder: Array[Char] = Array()
   var nextChar: Char = ' '
-  var filePosition: Int = -1
+  var filePosition: Int = 0
+  var filesize: Int=0
 
   //starter method that primes getnexttoken
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     fileHolder = file1.toCharArray
+    filesize = fileHolder.length
   }
 
   //grabs next character
   override def getChar(): Unit = {
-    if (filePosition < fileHolder.length - 1) {
+    if (filePosition < filesize) {//@@@
       filePosition += 1
       nextChar = fileHolder.charAt(filePosition)
     }
+    else
+      return
   }
 
   //called from getNext to manage new char grab
@@ -41,7 +45,6 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     if (nextChar.equals('+') || nextChar.equals('=') || nextChar.equals('#') || nextChar.equals('(') || nextChar.equals(')') || nextChar.equals(']') || nextChar.equals('[')) {
       addChar()
     }
-
     //breaks for \\ defs
     else if (nextChar.equals('\\')) {
       addChar()
@@ -86,11 +89,15 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       getChar()
       while (!CONSTANTS.TOKENS.contains(nextChar)) {
         addChar()
-        getChar()
+        if(filePosition < filesize) {//@@@
+          getChar()
+        }
+        else
+          return
       }
       filePosition -= 1
     }
-    pakage()
+      pakage()
   }
 
   //checks posible token to see if their are any special characters
@@ -98,7 +105,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     var isText: Boolean = true
     var i: Int = 0
     while (i < text.length && !isText) {
-      if (lookUp.contains(text.charAt(i))) {
+      if (lookUp.contains(text.charAt(i)) /*&& (!CONSTANTS.TOKENS.contains(text.charAt(i)))*/) {//@@@
         isText = false
       }
       i += 1
@@ -113,9 +120,14 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def pakage(): Unit = {
     val posibleToken: String = token.mkString //make array into string to check
     println(posibleToken)
-    if (lookUp.contains(posibleToken) || isText(posibleToken)) {
+    if (lookUp.contains(posibleToken) || isText(posibleToken)) { //@@@ needs to be broken for istext
       setCurrent(posibleToken) //set token in compiler
       token.clear()
+    }
+    else{
+      println("Lexical Error: Token was incorect")
+      println(Compiler.currentToken + "Was found")
+      System.exit(1)
     }
   }
 
