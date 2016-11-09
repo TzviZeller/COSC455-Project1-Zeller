@@ -103,7 +103,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def paragraph(): Unit = {
     parb()
-    variableDefine() //needs else contion
+    variableDefine()
     innerText()
     pare()
   }
@@ -111,7 +111,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def heading(): Unit = {
     headb()
     text()
-    lineBreak()
+   // lineBreak()
   }
 
   override def variableDefine(): Unit = {
@@ -144,7 +144,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def listItem(): Unit = {
     listItemb()
-    //inner-item
+    innerItem()
     lineBreak()
   }
 
@@ -223,7 +223,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   def leftParan(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.ADDRESSB)) {
-      parse.push(")")
+      parse.push("(")
       Compiler.lex.getNextToken()
     }
     else {
@@ -234,8 +234,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   def rightParan(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase("(")) {
-      parse.push("(")
+    if (Compiler.currentToken.equalsIgnoreCase(")")) {
+      parse.push(")")
       Compiler.lex.getNextToken()
     }
     else {
@@ -263,7 +263,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       Compiler.lex.getNextToken()
     }
     else {
-      println("Syntax Error: \r\n' was expected")
+      println("Syntax Error: \\r\\n was expected")
       println(Compiler.currentToken + "Was found instead")
       System.exit(1)
     }

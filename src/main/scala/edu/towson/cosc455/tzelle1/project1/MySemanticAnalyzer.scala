@@ -4,6 +4,7 @@ package edu.towson.cosc455.tzelle1.project1
 //this will implemt the language read in
 
 import scala.collection.mutable.Stack
+import java.io._
 import java.awt.Desktop
 import java.io.{File, IOException}
 
@@ -67,7 +68,7 @@ class MySemanticAnalyzer {
       else if (nextToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
         outputStack.push("<br>")
       }
-      else if (nextToken.equalsIgnoreCase(CONSTANTS.LINKB)) {//@@@
+      else if (nextToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
         val temp = parse.pop()
         parse.pop()
         parse.pop()
@@ -100,20 +101,28 @@ class MySemanticAnalyzer {
         outputStack.push("<br>")
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {//@@@
-        outputStack.push("<br>")
+        outputStack.push("<br>")//@@@ waitout
       }
 
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
-        outputStack.push("</html>")
+        outputStack.push("</html>")///@@@ waitout
       }
       else {
         println("send help")
         System.exit(1)
-        
+
         /*or strait push*/
       }
     }
 
+    //print output stak to file
+    val output = parse.reverse.toString()
+    val print = new PrintWriter(new File(Compiler.filename +".html"))
+    print.write(output)
+    print.close
+
+    //calls html to open
+    openHTMLFileInBrowser(Compiler.filename +".html")
   }
 
 

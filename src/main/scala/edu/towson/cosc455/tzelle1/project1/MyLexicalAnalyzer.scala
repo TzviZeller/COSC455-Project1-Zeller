@@ -11,19 +11,19 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   var token = new ArrayBuffer[Char](50)
   var fileHolder: Array[Char] = Array()
   var nextChar: Char = ' '
-  var filePosition: Int = 0
-  var filesize: Int=0
+  var filePosition: Int = -1
+  var filesize: Int = 0
 
   //starter method that primes getnexttoken
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     fileHolder = file1.toCharArray
-    filesize = fileHolder.length
+    filesize = fileHolder.length-1
   }
 
   //grabs next character
   override def getChar(): Unit = {
-    if (filePosition < filesize) {//@@@
+    if (filePosition < filesize) {
       filePosition += 1
       nextChar = fileHolder.charAt(filePosition)
     }
@@ -89,7 +89,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       getChar()
       while (!CONSTANTS.TOKENS.contains(nextChar)) {
         addChar()
-        if(filePosition < filesize) {//@@@
+        if(filePosition < filesize) {
           getChar()
         }
         else
@@ -118,14 +118,15 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   //pakage string if passses lookup
   def pakage(): Unit = {
-    val posibleToken: String = token.mkString //make array into string to check
+    val posibleToken: String = token.mkString
     println(posibleToken)
     if (lookUp.contains(posibleToken) || isText(posibleToken)) { //@@@ needs to be broken for istext
-      setCurrent(posibleToken) //set token in compiler
+      //set token in compiler
+      setCurrent(posibleToken)
       token.clear()
     }
     else{
-      println("Lexical Error: Token was incorect")
+      println("Lexical Error: Token was incorrect")
       println(Compiler.currentToken + "Was found")
       System.exit(1)
     }

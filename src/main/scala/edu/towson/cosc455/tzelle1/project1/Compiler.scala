@@ -12,9 +12,14 @@ object Compiler {
   val sam = new MySemanticAnalyzer
   var currentToken: String = ""
   var fileContents: String = ""
+  var endCase: Boolean = false
+  var filename: String = ""
 
   //driver for compiler
   def main(args: Array[String]) = {
+    //inishalizes filename
+    filename = args(0)
+
     //checks for filetype and packs content into a string
     checkFile(args)
     readFile(args(0))
@@ -31,14 +36,28 @@ object Compiler {
     lex.start(fileContents)
 
     //loops till file empty
-    while (lex.filePosition < lex.filesize) { //@@@
+    while (lex.filePosition < lex.filesize && !endCase) {
       //gets current token
       lex.getNextToken()
-      //checks current token for syntax
-      //sin.gittex()
+
+      //case to check end after
+      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+        lex.getChar()
+        lex.getChar()
+        if (!lex.nextChar.equals('\n')) {
+          println("Lexical Error: Token was found after \\END")
+          System.exit(1)
+        }
+        else
+          endCase = true
+      }
     }
+    //checks current token for syntax
+    //sin.gittex()
+
 
     //calls samantic analyzer
+    println()
     println("File has been read and checked")
     println("File is being convereted to HTML")
     //sam.symantics()
