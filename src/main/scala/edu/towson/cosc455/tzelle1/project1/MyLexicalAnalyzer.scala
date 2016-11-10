@@ -105,7 +105,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     var isText: Boolean = true
     var i: Int = 0
     while (i < text.length && !isText) {
-      if (lookUp.contains(text.charAt(i)) /*&& (!CONSTANTS.TOKENS.contains(text.charAt(i)))*/) {//@@@
+      if (text.contains(CONSTANTS.TOKENS) /*&& (!CONSTANTS.TOKENS.contains(text.charAt(i)))*/) {//@@@
         isText = false
       }
       i += 1

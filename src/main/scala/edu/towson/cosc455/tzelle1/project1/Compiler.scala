@@ -42,25 +42,21 @@ object Compiler {
 
       //case to check end after
       if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
-        lex.getChar()
-        lex.getChar()
-        if (!lex.nextChar.equals('\n')) {
-          println("Lexical Error: Token was found after \\END")
-          System.exit(1)
-        }
-        else
           endCase = true
       }
-    }
-    //checks current token for syntax
-    //sin.gittex()
 
+      //checks current token for syntax
+      sin.gittex()
+      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+        endCase = true
+      }
+    }
 
     //calls samantic analyzer
     println()
     println("File has been read and checked")
     println("File is being convereted to HTML")
-    //sam.symantics()
+    sam.symantics()
   }
 
   //packs file into a string

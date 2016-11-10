@@ -23,5 +23,5 @@ object CONSTANTS {
   val EQSIGN    : String = "="
   val USEB      : String = "\\USE["
   val REQTEXT   : String = ",abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789."
-  val TOKENS    : String = ('\\', '#', '*','[','!', ']', '+', '(', ')', '=').toString()
+  val TOKENS    : String = "\\#*[!]+()="
 }

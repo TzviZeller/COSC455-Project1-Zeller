@@ -26,6 +26,10 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       newline()
       body()
     }
+    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
+      {
+
+      }
     else {
       innerText()
       body()
@@ -66,6 +70,10 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       newline()
       innerText()
     }
+    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
+      {
+        return
+      }
     else //posible if if need empty case @@@
       posText()
   }
@@ -87,6 +95,10 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       link()
       innerItem()
     }
+    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
+      {
+        found = true
+      }
     else if (Compiler.lex.isText(Compiler.currentToken)) {
       text()
       innerItem()
@@ -145,7 +157,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def listItem(): Unit = {
     listItemb()
     innerItem()
-    lineBreak()
+    if(!Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
+      lineBreak()
   }
 
   override def link(): Unit = {
@@ -285,7 +298,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   def doce(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
       parse.push(CONSTANTS.DOCE)
-      Compiler.lex.getNextToken()
+
     }
     else {
       println("Syntax Error: \\END was expected")

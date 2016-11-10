@@ -10,12 +10,13 @@ import java.io.{File, IOException}
 
 class MySemanticAnalyzer {
   var outputStack = Stack[String]()
-  var parse = Compiler.sin.parse.reverse
+  var parse = Stack[String]()
   var variables = Stack[String]()
   var nextToken: String = ""
   var output: String = ""
 
   def symantics(): Unit = {
+    parse = Compiler.sin.parse.reverse
     lex()
     //openHTMLFileInBrowser() //change@@@
   }
@@ -74,55 +75,55 @@ class MySemanticAnalyzer {
         parse.pop()
         nextToken = parse.pop()
         parse.pop()
-        
-        outputStack.push("< a herf = \" ")
+
+        outputStack.push("<a href = \"")
         outputStack.push(nextToken)
         outputStack.push("\">")
         outputStack.push(temp)
         outputStack.push("</a>")
       }
-      else if (nextToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {//@@@
+      else if (nextToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
         val temp = parse.pop()
         parse.pop()
         parse.pop()
         nextToken = parse.pop()
         parse.pop()
 
-        outputStack.push("< a herf = \" ")
+        outputStack.push("<img src =\"")
         outputStack.push(nextToken)
-        outputStack.push("\">")
+        outputStack.push("\" alt=\"")
         outputStack.push(temp)
-        outputStack.push("</a>")
-        
-        outputStack.push("<img src = \" > ")
+        outputStack.push("\">")
       }
-      else if (nextToken.equalsIgnoreCase(CONSTANTS.DEFB)) {//@@@
+      else if (nextToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+        //@@@
         //variables  nextToken
         outputStack.push("<br>")
       }
-      else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {//@@@
-        outputStack.push("<br>")//@@@ waitout
+      else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+        //@@@
+        outputStack.push("<br>") //@@@ waitout
       }
 
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
-        outputStack.push("</html>")///@@@ waitout
+        outputStack.push("</html>") ///@@@ waitout
       }
       else {
-        println("send help")
-        System.exit(1)
+        /* println("send help")
+         System.exit(1)*/
 
         /*or strait push*/
       }
     }
 
     //print output stak to file
-    val output = parse.reverse.toString()
-    val print = new PrintWriter(new File(Compiler.filename +".html"))
+    val output = outputStack.reverse.mkString
+    val print = new PrintWriter(new File(Compiler.filename + ".html"))
     print.write(output)
     print.close
 
     //calls html to open
-    openHTMLFileInBrowser(Compiler.filename +".html")
+    openHTMLFileInBrowser(Compiler.filename + ".html")
   }
 
 
