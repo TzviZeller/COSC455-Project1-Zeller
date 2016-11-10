@@ -94,7 +94,7 @@ class MySemanticAnalyzer {
         outputStack.push(nextToken)
         outputStack.push("\">")
         outputStack.push(temp)
-        outputStack.push("</a>")
+        outputStack.push("</a> ")
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
@@ -128,7 +128,7 @@ class MySemanticAnalyzer {
       else {
         outputStack.push(nextToken)
         nextToken = parse.pop()
-        /* println("send help")
+        /* println("send help") @@@
          System.exit(1)*/
 
         /*or strait push*/

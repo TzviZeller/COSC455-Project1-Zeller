@@ -282,13 +282,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   def doce(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
       parse.push(CONSTANTS.DOCE)
-/*      Compiler.lex.getNextToken()//just added
-      if(Compiler.currentToken.equals("\n"))
+      Compiler.lex.getNextToken()
+      if(Compiler.lex.nextChar.equals('\n'))
         return
       else{
         println("SYNTAX ERROR: items after document end statement")
         System.exit(1)
-      }//just added end*/
+      }
     }
     else {
       println("Syntax Error: \\END was expected")

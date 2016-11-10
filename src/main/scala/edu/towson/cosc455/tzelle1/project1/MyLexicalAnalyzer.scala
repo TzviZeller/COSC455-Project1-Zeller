@@ -147,6 +147,10 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def getNotText(): Unit = {
     while (nextChar.equals(' ') || nextChar.equals('\r') || nextChar.equals('\n') || nextChar.equals('\t')) {
       getChar()
+      if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)){
+        getChar()
+        return
+      }
     }
   }
 
