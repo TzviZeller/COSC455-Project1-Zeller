@@ -37,7 +37,6 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def innerText(): Unit = {
-    //flag? @@@
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
       variableUse()
       innerText()
@@ -74,7 +73,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       {
         return
       }
-    else //posible if if need empty case @@@
+    else
       posText()
   }
 
@@ -104,7 +103,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       innerItem()
     }
     else
-      found = true //will need to mess with @@@
+      found = true
   }
 
   override def title(): Unit = {
@@ -123,7 +122,6 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def heading(): Unit = {
     headb()
     text()
-   // lineBreak()
   }
 
   override def variableDefine(): Unit = {
@@ -157,8 +155,6 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def listItem(): Unit = {
     listItemb()
     innerItem()
-    if(!Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
-      lineBreak()
   }
 
   override def link(): Unit = {
@@ -270,18 +266,6 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
     }
   }
 
-  def lineBreak(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase("\r\n")) {
-      //add to parse tree @@@
-      Compiler.lex.getNextToken()
-    }
-    else {
-      println("Syntax Error: \\r\\n was expected")
-      println(Compiler.currentToken + "Was found instead")
-      System.exit(1)
-    }
-  }
-
   //specific syntax defs for methods
   def docb(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
@@ -298,7 +282,13 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   def doce(): Unit = {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
       parse.push(CONSTANTS.DOCE)
-
+/*      Compiler.lex.getNextToken()//just added
+      if(Compiler.currentToken.equals("\n"))
+        return
+      else{
+        println("SYNTAX ERROR: items after document end statement")
+        System.exit(1)
+      }//just added end*/
     }
     else {
       println("Syntax Error: \\END was expected")

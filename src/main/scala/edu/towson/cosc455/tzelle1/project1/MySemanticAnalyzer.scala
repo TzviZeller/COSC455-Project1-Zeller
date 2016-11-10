@@ -70,7 +70,10 @@ class MySemanticAnalyzer {
       else if (nextToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
         outputStack.push("<li>")
         nextToken = parse.pop()
-        while (nextToken != "\n") {
+        if (nextToken.contains("\n")&& !parse.isEmpty) {
+          outputStack.push(nextToken)
+        }
+        else {
           lex()
         }
         outputStack.push("</li>")
@@ -140,6 +143,7 @@ class MySemanticAnalyzer {
 
     //calls html to open
     openHTMLFileInBrowser(Compiler.filename + ".html")
+    return
   }
 
 

@@ -1,7 +1,7 @@
 package edu.towson.cosc455.tzelle1.project1
 
 // Created by Tzvi on 10/11/2016.
-// Compiler Project for Gittext
+// Compiler for Gittext
 
 import scala.io.Source
 
@@ -10,6 +10,7 @@ object Compiler {
   val lex = new MyLexicalAnalyzer
   val sin = new MySyntaxAnalyzer
   val sam = new MySemanticAnalyzer
+
   var currentToken: String = ""
   var fileContents: String = ""
   var endCase: Boolean = false
@@ -24,13 +25,13 @@ object Compiler {
     checkFile(args)
     readFile(args(0))
 
-    //formation for printout
-    println("File passed in: ")
-    print(fileContents)
-    println()
-    println()
-    println("Processing File: ")
-    println("-------")
+    //formation for printout //red
+    println("File passed in: ") //red
+    print(fileContents) //red
+    println() //red
+    println() //red
+    println("Processing File: ") //red
+    println("-------") //red
 
     //pass fileString to
     lex.start(fileContents)
@@ -40,22 +41,24 @@ object Compiler {
       //gets current token
       lex.getNextToken()
 
-      //case to check end after
-      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
-          endCase = true
-      }
-
       //checks current token for syntax
       sin.gittex()
-      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) { //@@@ original included before
         endCase = true
       }
+
+      /*
+      else{
+      println("SYNTAX ERROR: items after document end statement")
+      System.exit(1)
+      }*/
     }
 
+    println() //red
+    println("File has been read and checked") //red
+    println("File is being convereted to HTML") //red
+
     //calls samantic analyzer
-    println()
-    println("File has been read and checked")
-    println("File is being convereted to HTML")
     sam.symantics()
   }
 

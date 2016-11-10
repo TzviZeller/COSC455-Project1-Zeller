@@ -18,7 +18,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def start(file1: String): Unit = {
     InishalizeLookupArray()
     fileHolder = file1.toCharArray
-    filesize = fileHolder.length-1
+    filesize = fileHolder.length - 1
   }
 
   //grabs next character
@@ -38,6 +38,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   //method is main driver that recusevly pulls text into tokens
   override def getNextToken(): Unit = {
+    //gets tokens and preps for nontext
     getChar()
     getNotText()
 
@@ -81,51 +82,56 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
     else if (nextChar.equals('!')) {
       addChar()
       getChar()
-      if (nextChar.equals('['))
+      if (nextChar.equals('[')) {
         addChar()
+      }
     }
     else {
       addChar()
       getChar()
       while (!CONSTANTS.TOKENS.contains(nextChar)) {
         addChar()
-        if(filePosition < filesize) {
+        if (filePosition < filesize) {
           getChar()
         }
-        else
+        else {
           return
+        }
       }
       filePosition -= 1
     }
-      pakage()
+    pakage()
   }
 
   //checks posible token to see if their are any special characters
   def isText(text: String): Boolean = {
+    //var define
     var isText: Boolean = true
     var i: Int = 0
+
+    //loops to identify breaks in text grammer
     while (i < text.length && !isText) {
-      if (text.contains(CONSTANTS.TOKENS) /*&& (!CONSTANTS.TOKENS.contains(text.charAt(i)))*/) {//@@@
+      if (text.contains(CONSTANTS.TOKENS)) {  //@@@
         isText = false
       }
       i += 1
     }
-    if (isText)
+    if (isText) {
       return true
-    else
+    }
+    else {
       return false
+    }
   }
 
   //pakage string if passses lookup
   def pakage(): Unit = {
     val posibleToken: String = token.mkString
-    println(posibleToken)
     if (lookUp.contains(posibleToken) || isText(posibleToken)) { //@@@ needs to be broken for istext
-      //set token in compiler
-      setCurrent(posibleToken)
+      setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
-    else{
+    else {
       println("Lexical Error: Token was incorrect")
       println(Compiler.currentToken + "Was found")
       System.exit(1)
