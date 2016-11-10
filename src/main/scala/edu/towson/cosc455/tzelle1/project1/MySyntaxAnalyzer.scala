@@ -21,7 +21,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       paragraph()
       body()
     }
-
+      
     else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
       newline()
       body()
@@ -40,6 +40,15 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
       variableUse()
       innerText()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAE)) {
+      if(parse.contains(CONSTANTS.PARAB)){
+        pare()
+      }
+      else {
+        println("Syntax Error: \\PARAB was never defined")
+        System.exit(1)
+      }
     }
     else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
       heading()
@@ -147,9 +156,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def italics(): Unit = {
-    italics()
+    italb()
     posText()
-    italics()
+    italb()
   }
 
   override def listItem(): Unit = {

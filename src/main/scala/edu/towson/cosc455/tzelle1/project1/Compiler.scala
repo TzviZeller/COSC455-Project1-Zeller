@@ -43,15 +43,9 @@ object Compiler {
 
       //checks current token for syntax
       sin.gittex()
-      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) { //@@@ original included before
+      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
         endCase = true
       }
-
-      /*
-      else{
-      println("SYNTAX ERROR: items after document end statement")
-      System.exit(1)
-      }*/
     }
 
     println() //red

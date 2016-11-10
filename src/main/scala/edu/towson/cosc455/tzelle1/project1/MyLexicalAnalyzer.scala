@@ -128,6 +128,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def pakage(): Unit = {
     val posibleToken: String = token.mkString
     if (lookUp.contains(posibleToken) || isText(posibleToken)) { //@@@ needs to be broken for istext
+      println(posibleToken)
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
