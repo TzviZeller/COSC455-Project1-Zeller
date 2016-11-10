@@ -17,15 +17,17 @@ class MySemanticAnalyzer {
 
   def symantics(): Unit = {
     parse = Compiler.sin.parse.reverse
+    nextToken = parse.pop()
+
     lex()
     //openHTMLFileInBrowser() //change@@@
   }
 
   def lex() {
     while (!parse.isEmpty) {
-      nextToken = parse.pop()
       if (nextToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
         outputStack.push("<html>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.TITLEB)) {
         outputStack.push("<head>")
@@ -34,29 +36,36 @@ class MySemanticAnalyzer {
         outputStack.push("</title>")
         outputStack.push("</head>")
         parse.pop()
+        nextToken = parse.pop()
+
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
         outputStack.push("<h1>")
         outputStack.push(parse.pop())
         outputStack.push("</h1>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.PARAB)) {
         outputStack.push("<p>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.PARAE)) {
         outputStack.push("</p>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.BOLD)) {
         outputStack.push("<b>")
         outputStack.push(parse.pop())
         outputStack.push("</b>")
         parse.pop()
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.ITALICS)) {
         outputStack.push("<i>")
         outputStack.push(parse.pop())
         outputStack.push("</i>")
         parse.pop()
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
         outputStack.push("<li>")
@@ -65,9 +74,11 @@ class MySemanticAnalyzer {
           lex()
         }
         outputStack.push("</li>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
         outputStack.push("<br>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
         val temp = parse.pop()
@@ -81,6 +92,7 @@ class MySemanticAnalyzer {
         outputStack.push("\">")
         outputStack.push(temp)
         outputStack.push("</a>")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.IMAGEB)) {
         val temp = parse.pop()
@@ -94,21 +106,25 @@ class MySemanticAnalyzer {
         outputStack.push("\" alt=\"")
         outputStack.push(temp)
         outputStack.push("\">")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
-        //@@@
-        //variables  nextToken
-        outputStack.push("<br>")
+        //@@@ variables  nextToken
+        outputStack.push("test")
+        nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {
         //@@@
-        outputStack.push("<br>") //@@@ waitout
+        outputStack.push("<red>")
+        nextToken = parse.pop()
       }
 
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
-        outputStack.push("</html>") ///@@@ waitout
+        outputStack.push("</html>")
       }
       else {
+        outputStack.push(nextToken)
+        nextToken = parse.pop()
         /* println("send help")
          System.exit(1)*/
 

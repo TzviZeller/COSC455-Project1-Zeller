@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a2a7959-0e65-408c-bf86-d0558baad91b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/CONSTANTS$.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/CONSTANTS$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/Compiler$.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/Compiler$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input.mkd" afterPath="$PROJECT_DIR$/input.mkd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/CONSTANTS.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/CONSTANTS.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input.mkd.html" afterPath="$PROJECT_DIR$/input.mkd.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala" />
     </list>
     <ignored path="COSC455-Project1-Zeller.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +72,8 @@
       <file leaf-file-name="MySemanticAnalyzer.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="83" column="7" selection-start-line="83" selection-start-column="7" selection-end-line="83" selection-end-column="7" />
+            <state relative-caret-position="159">
+              <caret line="122" column="32" selection-start-line="122" selection-start-column="32" selection-end-line="122" selection-end-column="32" />
               <folding>
                 <element signature="e#120#157#0" expanded="true" />
               </folding>
@@ -148,7 +140,6 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="683" />
     <option name="width" value="683" />
     <option name="height" value="728" />
   </component>
@@ -607,7 +598,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="683" y="0" width="683" height="728" extended-state="0" />
+    <frame x="0" y="0" width="683" height="728" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -685,27 +676,39 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
-          <line>19</line>
+          <line>21</line>
           <properties />
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
-          <line>125</line>
+          <line>141</line>
           <properties />
           <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
-          <line>119</line>
+          <line>135</line>
           <properties />
           <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>71</line>
+          <properties />
+          <option name="timeStamp" value="143" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="140" />
+      <option name="time" value="145" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1061,8 +1064,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="83" column="7" selection-start-line="83" selection-start-column="7" selection-end-line="83" selection-end-column="7" />
+        <state relative-caret-position="159">
+          <caret line="122" column="32" selection-start-line="122" selection-start-column="32" selection-end-line="122" selection-end-column="32" />
           <folding>
             <element signature="e#120#157#0" expanded="true" />
           </folding>
