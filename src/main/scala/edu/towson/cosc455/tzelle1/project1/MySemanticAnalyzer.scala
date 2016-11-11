@@ -11,7 +11,8 @@ import java.io.{File, IOException}
 class MySemanticAnalyzer {
   var outputStack = Stack[String]()
   var parse = Stack[String]()
-  var variables = Stack[String]()
+  var varName = Stack[String]()
+  var varMean = Stack[String]()
   var nextToken: String = ""
   var output: String = ""
 
@@ -19,8 +20,8 @@ class MySemanticAnalyzer {
     parse = Compiler.sin.parse.reverse
     nextToken = parse.pop()
 
+    //calls method that process the files
     lex()
-    //openHTMLFileInBrowser() //change@@@
   }
 
   def lex() {
@@ -112,12 +113,27 @@ class MySemanticAnalyzer {
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
-        //@@@ variables  nextToken
-        outputStack.push("test")
+        val name = parse.pop()
+        parse.pop()
+        val mean = parse.pop()
+        parse.pop()
+
+        //var and def are pased to arrays
+        varName.push(name)
+        varMean.push(mean)
+
+        //nothing to push so recusive pop
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {
-        //@@@
+        val name = parse.pop()
+        parse.pop()
+
+        if(varName.contains(name)){
+          val mean = varName.find(name => return)
+        }
+
+        val varible =
         outputStack.push("<red>")
         nextToken = parse.pop()
       }
@@ -128,10 +144,6 @@ class MySemanticAnalyzer {
       else {
         outputStack.push(nextToken)
         nextToken = parse.pop()
-        /* println("send help") @@@
-         System.exit(1)*/
-
-        /*or strait push*/
       }
     }
 

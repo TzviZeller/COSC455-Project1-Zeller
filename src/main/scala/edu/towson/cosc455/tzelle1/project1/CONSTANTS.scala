@@ -19,7 +19,7 @@ object CONSTANTS {
   val ADDRESSB  : String = "("
   val ADDRESSE  : String = ")"
   val IMAGEB    : String = "!["
-  val DEFB      : String = "\\DEF"
+  val DEFB      : String = "\\DEF["
   val EQSIGN    : String = "="
   val USEB      : String = "\\USE["
   val REQTEXT   : String = ",abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789."

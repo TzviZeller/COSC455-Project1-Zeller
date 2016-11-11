@@ -21,15 +21,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       paragraph()
       body()
     }
-      
+
     else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
       newline()
       body()
     }
-    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
-      {
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
 
-      }
+    }
     else {
       innerText()
       body()
@@ -37,11 +36,8 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def innerText(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
-      variableUse()
-      innerText()
-    }
-    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAE)) {
+
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAE)) {
       if(parse.contains(CONSTANTS.PARAB)){
         pare()
       }
@@ -50,7 +46,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
         System.exit(1)
       }
     }
-    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
       heading()
       innerText()
     }
@@ -70,6 +66,10 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       image()
       innerText()
     }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.USEB)) {
+      variableUse()
+      innerText()
+    }
     else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.LINKB)) {
       link()
       innerText()
@@ -78,10 +78,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       newline()
       innerText()
     }
-    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
-      {
-        return
-      }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+      return
+    }
     else
       posText()
   }
@@ -103,10 +102,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       link()
       innerItem()
     }
-    else if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE))
-      {
-        found = true
-      }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+      found = true
+    }
     else if (Compiler.lex.isText(Compiler.currentToken)) {
       text()
       innerItem()
@@ -124,7 +122,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def paragraph(): Unit = {
     parb()
     variableDefine()
-    innerText()
+    while (!Compiler.currentToken.equals(CONSTANTS.DOCE) && !Compiler.currentToken.equals(CONSTANTS.PARAE)) {
+      innerText()
+    }
     pare()
   }
 
@@ -292,9 +292,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
     if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
       parse.push(CONSTANTS.DOCE)
       Compiler.lex.getNextToken()
-      if(Compiler.lex.nextChar.equals('\n'))
+      if (Compiler.lex.nextChar.equals('\n'))
         return
-      else{
+      else {
         println("SYNTAX ERROR: items after document end statement")
         System.exit(1)
       }
