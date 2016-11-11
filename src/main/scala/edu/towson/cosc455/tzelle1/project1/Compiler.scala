@@ -3,8 +3,6 @@ package edu.towson.cosc455.tzelle1.project1
 // Created by Tzvi on 10/11/2016.
 // Compiler for Gittext
 
-import scala.io.Source
-
 object Compiler {
   //inisalise classes and vars
   val lex = new MyLexicalAnalyzer

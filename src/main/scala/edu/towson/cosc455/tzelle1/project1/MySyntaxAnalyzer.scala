@@ -10,7 +10,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def gittex(): Unit = {
     docb()
-    variableDefine()
+    while(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+      variableDefine()
+    }
     title()
     body()
     doce()
@@ -134,12 +136,12 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def variableDefine(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
-      defb()
-      text()
-      equl()
-      text()
-      rightBrace()
+      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+        defb()
+        text()
+        equl()
+        text()
+        rightBrace()
     }
   }
 
@@ -152,7 +154,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   override def bold(): Unit = {
     bold()
     posText()
-    bold()
+    bold() //@@@
   }
 
   override def italics(): Unit = {
@@ -163,7 +165,7 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
 
   override def listItem(): Unit = {
     listItemb()
-    innerItem()
+    innerItem() //@@@
   }
 
   override def link(): Unit = {

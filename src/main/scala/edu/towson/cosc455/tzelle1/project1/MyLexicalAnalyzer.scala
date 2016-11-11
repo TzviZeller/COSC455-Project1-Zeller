@@ -105,36 +105,28 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
 
   //checks posible token to see if their are any special characters
   def isText(text: String): Boolean = {
-    //var define
-    var isText: Boolean = true
-    var i: Int = 0
-
-    //loops to identify breaks in text grammer
-    while (i < text.length && !isText) {
-      if (text.contains(CONSTANTS.TOKENS)) {  //@@@
-        isText = false
-      }
-      i += 1
-    }
-    if (isText) {
+    if (text.contains("\\"))
+         return false
+    else
       return true
-    }
-    else {
-      return false
-    }
   }
 
   //pakage string if passses lookup
   def pakage(): Unit = {
     val posibleToken: String = token.mkString
-    if (lookUp.contains(posibleToken) || isText(posibleToken)) { //@@@ needs to be broken for istext
+    if (lookUp.contains(posibleToken.toUpperCase)) {
+      println(posibleToken)
+      setCurrent(posibleToken) //set token in compiler
+      token.clear()
+    }
+   else if (isText(posibleToken)) {
       println(posibleToken)
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
     else {
       println("Lexical Error: Token was incorrect")
-      println(Compiler.currentToken + "Was found")
+      println(posibleToken + "Was found")
       System.exit(1)
     }
   }
@@ -148,7 +140,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def getNotText(): Unit = {
     while (nextChar.equals(' ') || nextChar.equals('\r') || nextChar.equals('\n') || nextChar.equals('\t')) {
       getChar()
-      if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)){
+      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
         getChar()
         return
       }

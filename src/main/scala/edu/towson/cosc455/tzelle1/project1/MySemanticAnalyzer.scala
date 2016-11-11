@@ -11,12 +11,14 @@ import java.io.{File, IOException}
 class MySemanticAnalyzer {
   var outputStack = Stack[String]()
   var parse = Stack[String]()
-  var varName = Stack[String]()
-  var varMean = Stack[String]()
+  var varName = new Array[String](50)
+  var varMean = new Array[String](50)
   var nextToken: String = ""
   var output: String = ""
+  var varCount: Int = 0
 
   def symantics(): Unit = {
+    //preps for method
     parse = Compiler.sin.parse.reverse
     nextToken = parse.pop()
 
@@ -24,6 +26,7 @@ class MySemanticAnalyzer {
     lex()
   }
 
+  //while statment to translante text
   def lex() {
     while (!parse.isEmpty) {
       if (nextToken.equalsIgnoreCase(CONSTANTS.DOCB)) {
@@ -38,7 +41,6 @@ class MySemanticAnalyzer {
         outputStack.push("</head>")
         parse.pop()
         nextToken = parse.pop()
-
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.HEADING)) {
         outputStack.push("<h1>")
@@ -71,7 +73,7 @@ class MySemanticAnalyzer {
       else if (nextToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
         outputStack.push("<li>")
         nextToken = parse.pop()
-        if (nextToken.contains("\n")&& !parse.isEmpty) {
+        if (nextToken.contains("\n") && !parse.isEmpty) {
           outputStack.push(nextToken)
         }
         else {
@@ -119,22 +121,34 @@ class MySemanticAnalyzer {
         parse.pop()
 
         //var and def are pased to arrays
-        varName.push(name)
-        varMean.push(mean)
+        if (varName.contains(name)) {
+          val defed = varName.indexWhere(name)
+          varName(defed) = name
+          varMean(defed) = mean
+        }
+        else {
+          varName(varCount) = name
+          varMean(varCount) = mean
+          varCount += 1
+        }
 
         //nothing to push so recusive pop
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {
-        val name = parse.pop()
+        val name: String = parse.pop()
         parse.pop()
 
-        if(varName.contains(name)){
-          val mean = varName.find(name => return)
+        //test for var
+        if (varName.contains(name)) {
+          val defed = varName.IndexOf(name)
+          outputStack.push(varMean(defed))
         }
-
-        val varible =
-        outputStack.push("<red>")
+        else {
+          println("Static Symantic Error: Varibale by that name has not been defined")
+          System.exit(1)
+        }
+        //incremnt
         nextToken = parse.pop()
       }
 
