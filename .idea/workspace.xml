@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a2a7959-0e65-408c-bf86-d0558baad91b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer$$anonfun$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/Compiler$.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/Compiler$.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.class" afterPath="$PROJECT_DIR$/target/scala-2.11/classes/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/input.mkd" afterPath="$PROJECT_DIR$/input.mkd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala" afterPath="$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala" />
     </list>
     <ignored path="COSC455-Project1-Zeller.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +40,7 @@
       <file leaf-file-name="Compiler.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
+            <state relative-caret-position="884">
               <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
               <folding />
             </state>
@@ -58,7 +50,7 @@
       <file leaf-file-name="MyLexicalAnalyzer.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
+            <state relative-caret-position="17">
               <caret line="9" column="19" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
@@ -68,8 +60,8 @@
       <file leaf-file-name="MySyntaxAnalyzer.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="296" column="6" selection-start-line="296" selection-start-column="6" selection-end-line="296" selection-end-column="6" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,8 +70,8 @@
       <file leaf-file-name="MySemanticAnalyzer.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="148" column="24" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+            <state relative-caret-position="121">
+              <caret line="131" column="11" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
               <folding>
                 <element signature="e#120#157#0" expanded="true" />
               </folding>
@@ -187,8 +179,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -209,7 +202,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -711,11 +703,35 @@
           <properties />
           <option name="timeStamp" value="224" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>143</line>
+          <properties />
+          <option name="timeStamp" value="225" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>124</line>
+          <properties />
+          <option name="timeStamp" value="226" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>142</line>
+          <properties />
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="scala-line">
+          <url>file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="228" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="225" />
+      <option name="time" value="229" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1031,9 +1047,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/Compiler.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
+        <state relative-caret-position="884">
           <caret line="53" column="4" selection-start-line="53" selection-start-column="4" selection-end-line="53" selection-end-column="4" />
           <folding />
         </state>
@@ -1055,26 +1087,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySyntaxAnalyzer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="296" column="6" selection-start-line="296" selection-start-column="6" selection-end-line="296" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MyLexicalAnalyzer.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="9" column="19" selection-start-line="9" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/edu/towson/cosc455/tzelle1/project1/MySemanticAnalyzer.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="148" column="24" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+        <state relative-caret-position="121">
+          <caret line="131" column="11" selection-start-line="131" selection-start-column="11" selection-end-line="131" selection-end-column="11" />
           <folding>
             <element signature="e#120#157#0" expanded="true" />
           </folding>

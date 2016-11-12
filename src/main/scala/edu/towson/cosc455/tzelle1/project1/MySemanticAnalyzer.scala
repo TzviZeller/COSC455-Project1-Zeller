@@ -11,8 +11,8 @@ import java.io.{File, IOException}
 class MySemanticAnalyzer {
   var outputStack = Stack[String]()
   var parse = Stack[String]()
-  var varName = new Array[String](50)
-  var varMean = new Array[String](50)
+  var varName = List[String]("")
+  var varMean = List[String]("")
   var nextToken: String = ""
   var output: String = ""
   var varCount: Int = 0
@@ -122,13 +122,13 @@ class MySemanticAnalyzer {
 
         //var and def are pased to arrays
         if (varName.contains(name)) {
-          val defed = varName.indexWhere(name)
-          varName(defed) = name
-          varMean(defed) = mean
+          val defed = varName.indexOf(name)
+          varName.updated(defed,name)
+          varMean.updated(defed,mean)
         }
         else {
-          varName(varCount) = name
-          varMean(varCount) = mean
+          varName.updated(varCount,name)
+          varMean.updated(varCount,mean)
           varCount += 1
         }
 
@@ -141,8 +141,8 @@ class MySemanticAnalyzer {
 
         //test for var
         if (varName.contains(name)) {
-          val defed = varName.IndexOf(name)
-          outputStack.push(varMean(defed))
+          val defed = varName.indexOf(name)
+          outputStack.push(varMean.apply(defed))
         }
         else {
           println("Static Symantic Error: Varibale by that name has not been defined")
