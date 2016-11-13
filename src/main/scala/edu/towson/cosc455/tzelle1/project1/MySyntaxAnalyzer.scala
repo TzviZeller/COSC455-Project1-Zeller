@@ -19,11 +19,14 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def body(): Unit = {
-    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAB)) {
+    if(Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+      variableDefine()
+      body()
+    }
+    else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.PARAB)) {
       paragraph()
       body()
     }
-
     else if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
       newline()
       body()
@@ -136,12 +139,12 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
   }
 
   override def variableDefine(): Unit = {
-      if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
-        defb()
-        text()
-        equl()
-        text()
-        rightBrace()
+    if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
+      defb()
+      text()
+      equl()
+      text()
+      rightBrace()
     }
   }
 

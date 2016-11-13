@@ -106,7 +106,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   //checks posible token to see if their are any special characters
   def isText(text: String): Boolean = {
     if (text.contains("\\"))
-         return false
+      return false
     else
       return true
   }
@@ -119,7 +119,7 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
-   else if (isText(posibleToken)) {
+    else if (isText(posibleToken)) {
       println(posibleToken)
       setCurrent(posibleToken) //set token in compiler
       token.clear()

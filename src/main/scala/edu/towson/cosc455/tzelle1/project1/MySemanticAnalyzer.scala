@@ -16,7 +16,7 @@ class MySemanticAnalyzer {
   var nextToken: String = ""
   var output: String = ""
   var varCount: Int = 0
-
+  var hasPrinted : Boolean = false
   def symantics(): Unit = {
     //preps for method
     parse = Compiler.sin.parse.reverse
@@ -73,14 +73,16 @@ class MySemanticAnalyzer {
       else if (nextToken.equalsIgnoreCase(CONSTANTS.LISTITEM)) {
         outputStack.push("<li>")
         nextToken = parse.pop()
-        if (nextToken.contains("\n") && !parse.isEmpty) {
+        if (nextToken.contains("\n") && !parse.isEmpty && !nextToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
           outputStack.push(nextToken)
         }
         else {
-          lex()
+          if(!nextToken.equalsIgnoreCase(CONSTANTS.DOCE))
+            lex()
         }
         outputStack.push("</li>")
-        nextToken = parse.pop()
+        if(!parse.isEmpty)
+          nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.NEWLINE)) {
         outputStack.push("<br>")
@@ -115,11 +117,11 @@ class MySemanticAnalyzer {
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.DEFB)) {
-        val name = parse.pop()
+        var name = parse.pop()
         parse.pop()
         val mean = parse.pop()
         parse.pop()
-
+        name = name.filter(!" ".contains(_))
         //var and def are pased to arrays
         val defed = varName.indexOf(name)
         if (defed != -1) {
@@ -136,17 +138,12 @@ class MySemanticAnalyzer {
         nextToken = parse.pop()
       }
       else if (nextToken.equalsIgnoreCase(CONSTANTS.USEB)) {
-        val name: String = parse.pop()
+        var name: String = parse.pop()
         parse.pop()
-
+        name = name.filter(!" ".contains(_))
         //test for var
-        var i: Int = 0
-        while((varName(i) != name) || i < varName.length ){
-          i += 1
-        }
-        if (! (varName.length < i)) {
-          outputStack.push(varMean(i))
-        }
+        if(varName.contains(name))
+          outputStack.push(varMean(varName.indexOf(name)))
         else {
           println("Static Symantic Error: Varibale by that name has not been defined")
           System.exit(1)
@@ -171,8 +168,10 @@ class MySemanticAnalyzer {
     print.close
 
     //calls html to open
-    openHTMLFileInBrowser(Compiler.filename + ".html")
-    return
+    if(!hasPrinted) {
+      openHTMLFileInBrowser(Compiler.filename + ".html")
+      hasPrinted = true
+    }
   }
 
 
