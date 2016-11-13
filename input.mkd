@@ -1,15 +1,14 @@
-\begin
-	\TITLE[The Simpsons]
-	# The Simpsons
+\BEGIN
+	\DEF[lastname = Simpson]
+	\TITLE[Variables]
+
 	\PARAB
-		The members of the [The Simpsons](https://en.wikipedia.org/wiki/The_Simpsons) are:
+		The members of the \USE[name] family are:
 	\PARAE
-	+ Homer Simpson
-	+ Marge Simpson
-	+ Bart Simpson
-	+ Lisa Simpson
-	+ Maggie Simpson
-	** Here ** is a * picture *:
-	\\
-	![The Simpsons] (https://upload.wikimedia.org/wikipedia/en/0/0d/Simpsons_FamilyPicture.png)
-\end
+
+	+ Homer \USE[name]
+	+ Marge \USE[name]
+	+ Bart \USE[name]
+	+ Lisa \USE[name]
+	+ Maggie \USE[name]
+\END

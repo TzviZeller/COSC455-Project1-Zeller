@@ -115,12 +115,10 @@ class MyLexicalAnalyzer extends LexicalAnalyzer {
   def pakage(): Unit = {
     val posibleToken: String = token.mkString
     if (lookUp.contains(posibleToken.toUpperCase)) {
-      println(posibleToken)
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }
     else if (isText(posibleToken)) {
-      println(posibleToken)
       setCurrent(posibleToken) //set token in compiler
       token.clear()
     }

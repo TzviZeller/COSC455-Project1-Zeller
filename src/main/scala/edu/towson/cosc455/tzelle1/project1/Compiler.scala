@@ -23,14 +23,6 @@ object Compiler {
     checkFile(args)
     readFile(args(0))
 
-    //formation for printout //red
-    println("File passed in: ") //red
-    print(fileContents) //red
-    println() //red
-    println() //red
-    println("Processing File: ") //red
-    println("-------") //red
-
     //pass fileString to
     lex.start(fileContents)
 
@@ -45,10 +37,6 @@ object Compiler {
         endCase = true
       }
     }
-
-    println() //red
-    println("File has been read and checked") //red
-    println("File is being convereted to HTML") //red
 
     //calls samantic analyzer
     sam.symantics()
